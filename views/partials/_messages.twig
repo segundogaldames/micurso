@@ -1,0 +1,7 @@
+{% if flash_messages %}
+    {% for flash in flash_messages %}
+        <div class="{{ flash.class }}">
+            {{ flash.message|raw }}
+        </div>
+    {% endfor %}
+{% endif %}

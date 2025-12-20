@@ -1,0 +1,26 @@
+{
+    "name": "segundogaldames/axiomaframe",
+    "description": "Micro framework para crear app",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Segundo Galdames",
+            "email": "segundogaldames@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^11.0",
+        "twig/twig": "^3.7",
+        "phpmailer/phpmailer": "^6.10"
+    },
+    "autoload":{
+        "psr-4": {
+            "models\\": "models/",
+            "controllers\\": "controllers/",
+            "application\\": "application/",
+            "services\\": "services/"
+        }
+    },
+    "minimum-stability": "stable"
+}

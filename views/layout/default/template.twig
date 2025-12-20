@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="curso de desarrollo web con php, mysql, javascript, html5, css3 y bootstrap 5">
+  <meta name="keywords" content="curso, desarrollo, web, php, mysql, javascript, html5, css3, bootstrap 5" />
+
+  <title>
+    {% block title %}{% endblock %}
+  </title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+  <meta name="title" content="Mi Curso" />
+  <meta name="author" content="Segundo Galdames" />
+  <meta name="supported-color-schemes" content="light dark" />
+
+  {% include 'layout/default/link_css.twig' %}
+
+
+</head>
+
+<body>
+  
+  <div class="app-wrapper">
+    {% include 'layout/default/menu.twig' %}
+    {% include 'layout/default/sidebar.twig' %}
+    <div class="app-main">
+      {% include 'layout/default/header.twig' %}  
+      {% block content %}{% endblock %}
+
+    </div>
+    {% include "layout/default/footer.twig" %}
+  </div>
+
+  {% include 'layout/default/link_js.twig' %}
+
+  <noscript>
+    <p>Debe tener el soporte de Javascript habilitado</p>
+  </noscript>
+
+</body>
+
+</html>
