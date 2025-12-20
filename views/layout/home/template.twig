@@ -25,17 +25,10 @@
 
 </head>
 
-<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+<body class="login-page bg-body-secondary">
   
-  <div class="app-wrapper">
-    {% include 'layout/default/menu.twig' %}
-    {% include 'layout/default/sidebar.twig' %}
-    <div class="app-main">
-      {% include 'layout/default/header.twig' %}  
-      {% block content %}{% endblock %}
-
-    </div>
-    {% include "layout/default/footer.twig" %}
+  <div class="">
+    {% block content %}{% endblock %}
   </div>
 
   {% include 'layout/default/link_js.twig' %}
