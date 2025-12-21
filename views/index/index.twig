@@ -2,16 +2,98 @@
 {% block title %}Bienvenidos{% endblock %}
 
 {% block content %}
-    <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-secondary">Bienvenidos a AxiomaFrame</h1>
-        <p class="lead text-muted">Una propuesta de desarrollo de software simple, escalable, basado en buenas prácticas de programación y el uso de MVC (Modelo-vista-Controlador) como patrón de diseño.</p>
-        <p>
-        <p class="lead text-muted">Te ofrecemos una manera sencilla de crear software altamente escalable a partir de configuraciones mínimas, pero si tu proyecto crece, podrás utilizar todas las herramientas que desees.</p>
-        <p>
-        <p class="lead text-muted"><strong>AxiomaFrame</strong>... sencillamente simple.</p>
-        <p>
-            <a href="https://github.com/segundogaldames/axiomaframe/blob/main/README.md" target="_blank" class="btn btn-secondary my-2">Mas Información</a>
-            <a href="https://github.com/segundogaldames/axiomaframe/blob/main/DOCUMENT.md" target="_blank" class="btn btn-secondary my-2">Documentación</a>
-        </p>
+<style>
+    .img-top {
+        background-image: url('{{BASE}}views/layout/home/img/portada2.jpg');
+
+    }
+</style>
+<section class="img-top bg-cover bg-center bg-contain h-96">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-36">
+        <div class="w-full md:w-3/4 lg:w-1/2">
+            <h1 class="text-white font-bold text-4xl">Domina la tecnología con mi academia</h1>
+            <p class="text-white text-lg mt-2 mb-4">Aquí encontrarás los mejores cursos para tu formación profesional para
+                crezcas y tengas mucho trabajo</p>
+
+            <form class="max-w-md mx-auto">
+                <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only ">Buscar</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input type="search" id="search"
+                        class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                        placeholder="Search" required />
+                    <button type="submit"
+                        class="absolute end-1.5 bottom-1.5 text-white bg-blue-500 hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Buscar</button>
+                </div>
+            </form>
+
+        </div>
     </div>
+
+</section>
+<section class="mt-4">
+    <h1 class="text-gray-600 text-center text-3xl mb-2">CONTENIDOS</h1>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <article>
+            <figure>
+                <img class="rounded-xl h-36 w-full object-cover" src="{{BASE}}views/layout/home/img/curso1.jpg" alt="">
+            </figure>
+            <header class="mt-2">
+                <h1 class="text-center text-xl text-gray-700">Curso 1</h1>
+            </header>
+            <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, error soluta? Animi modi harum nesciunt commodi accusamus.</p>
+        </article>
+        <article>
+            <figure>
+                <img class="rounded-xl h-36 w-full object-cover" src="{{BASE}}views/layout/home/img/curso2.jpg" alt="">
+            </figure>
+            <header class="mt-2">
+                <h1 class="text-center text-xl text-gray-700">Curso 2</h1>
+            </header>
+            <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, error soluta? Animi modi harum nesciunt commodi accusamus.</p>
+        </article>
+        <article>
+            <figure>
+                <img class="rounded-xl h-36 w-full object-cover" src="{{BASE}}views/layout/home/img/curso3.jpg" alt="">
+            </figure>
+            <header class="mt-2">
+                <h1 class="text-center text-xl text-gray-700">Curso 3</h1>
+            </header>
+            <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, error soluta? Animi modi harum nesciunt commodi accusamus.</p>
+        </article>
+        <article>
+            <figure>
+                <img class="rounded-xl h-36 w-full object-cover" src="{{BASE}}views/layout/home/img/curso4.jpg" alt="">
+            </figure>
+            <header class="mt-2">
+                <h1 class="text-center text-xl text-gray-700">Curso 4</h1>
+            </header>
+            <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, error soluta? Animi modi harum nesciunt commodi accusamus.</p>
+        </article>
+        <article>
+            <figure>
+                <img class="rounded-xl h-36 w-full object-cover" src="{{BASE}}views/layout/home/img/curso5.jpg" alt="">
+            </figure>
+            <header class="mt-2">
+                <h1 class="text-center text-xl text-gray-700">Curso 5</h1>
+            </header>
+            <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, error soluta? Animi modi harum nesciunt commodi accusamus.</p>
+        </article>
+        <article>
+            <figure>
+                <img class="rounded-xl h-36 w-full object-cover" src="{{BASE}}views/layout/home/img/curso6.jpg" alt="">
+            </figure>
+            <header class="mt-2">
+                <h1 class="text-center text-xl text-gray-700">Curso 6</h1>
+            </header>
+            <p class="text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, error soluta? Animi modi harum nesciunt commodi accusamus.</p>
+        </article>
+    </div>
+</section>
 {% endblock %}

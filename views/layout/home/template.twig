@@ -20,18 +20,18 @@
   <meta name="author" content="Segundo Galdames" />
   <meta name="supported-color-schemes" content="light dark" />
 
-  {% include 'layout/default/link_css.twig' %}
+  {% include 'layout/home/link_css.twig' %}
 
 
 </head>
 
-<body class="login-page bg-body-secondary">
-  
-  <div class="">
+<body>
+  {% include "layout/home/menu.twig" %}
+  <div>
     {% block content %}{% endblock %}
   </div>
 
-  {% include 'layout/default/link_js.twig' %}
+  {% include 'layout/home/link_js.twig' %}
 
   <noscript>
     <p>Debe tener el soporte de Javascript habilitado</p>

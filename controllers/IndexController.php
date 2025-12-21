@@ -6,6 +6,7 @@ use application\Controller;
 use application\Flash;
 use application\Helper;
 use application\Session;
+use models\Course;
 
 class indexController extends Controller
 {
@@ -18,6 +19,9 @@ class indexController extends Controller
 	public function index()
 	{
 
-		$this->_view->load('index/index');
+		$this->_view->load('index/index',[
+			'titulo' => 'Bienvenidos a E-Learning',
+			'courses' => Course::where('status_id', 3)->latest('id')->get()
+		]);
 	}
 }
