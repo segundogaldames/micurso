@@ -1,0 +1,265 @@
+{% extends "layout/home/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{% if course is not empty %}
+<section class="bg-gray-700 py-4 mb-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <figure>
+            <img class="h-72 w-full object-cover"
+                src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
+        </figure>
+        <div class="text-white">
+            <h1 class="text-4xl"> {{course.title}} </h1>
+            <h2 class="text-xl mb-2"> {{course.subtitle}} </h2>
+            <p class="mb-2 flex">
+                <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 16.881V7.119a1 1 0 0 1 1.636-.772l5.927 4.881a1 1 0 0 1 0 1.544l-5.927 4.88A1 1 0 0 1 8 16.882Z" />
+                </svg>
+
+                Nivel: {{course.level.name}}
+            </p>
+            <p class="mb-2 flex">
+                <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 16.881V7.119a1 1 0 0 1 1.636-.772l5.927 4.881a1 1 0 0 1 0 1.544l-5.927 4.88A1 1 0 0 1 8 16.882Z" />
+                </svg>
+                Categoría: {{course.category.name}}
+            </p>
+            <p class="mb-2 flex">
+                <svg class="w-6 h-6 text-gray-800 text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                        d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+
+                Matriculados: 0
+            </p>
+            <p class="flex">
+                <svg class="w-6 h-6 text-gray-800 text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-width="2"
+                        d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
+                </svg>
+
+                Calificación: 5
+            </p>
+        </div>
+    </div>
+
+
+
+</section>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-3 gap-6">
+    <div class="col-span-2">
+        <section class="bg-white shadow-lg rounded-sm overflow-hidden mb-4">
+            <div>
+                <h1 class="text-bold text-2xl mb-2">Lo que aprenderás</h1>
+                <ul class="grid grid-cols-2 gap-2">
+                    <li class="flex">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 11.917 9.724 16.5 19 7.5" />
+                        </svg>
+
+                        Meta 1
+                    </li>
+                    <li class="flex">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 11.917 9.724 16.5 19 7.5" />
+                        </svg>
+
+                        Meta 2
+                    </li>
+                    <li class="flex">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 11.917 9.724 16.5 19 7.5" />
+                        </svg>
+
+                        Meta 3
+                    </li>
+                    <li class="flex">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 11.917 9.724 16.5 19 7.5" />
+                        </svg>
+
+                        Meta 4
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="mb-4">
+            <h1 class="font-bold text-2xl">Temario</h1>
+            <article class="mb-4 shadow" x-data="{ open: false }">
+                <header class="border border-gray-200 px-4 py-2 cursor-pointer" x-on:click="open = !open">
+                    <h1 class="text-bold text-lg text-gray-600">Seccion 1</h1>
+                </header>
+                <div class="bg-white py-2 px-4" x-show="open">
+                    <ul>
+                        <li class="text-gray-700 text-base flex">
+                            <svg class="w-5 h-5 text-gray-800 dark:text-white mr-2" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+
+                            Leccion 1
+                        </li>
+                        <li class="text-gray-700 text-base flex">
+                            <svg class="w-5 h-5 text-gray-800 dark:text-white mr-2" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+
+                            Leccion 2
+                        </li>
+                        <li class="text-gray-700 text-base flex">
+                            <svg class="w-5 h-5 text-gray-800 dark:text-white mr-2" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+
+                            Leccion 3
+                        </li>
+                        <li class="text-gray-700 text-base flex">
+                            <svg class="w-5 h-5 text-gray-800 dark:text-white mr-2" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+
+
+                            Leccion 4
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="mb-4 shadow">
+                Seccion 2
+            </article>
+            <article class="mb-4 shadow">
+                Seccion 3
+            </article>
+            <article class="mb-4 shadow">
+                Seccion 4
+            </article>
+        </section>
+        <section class="mb-6">
+            <h1 class="font-bold text-2xl">Requisitos</h1>
+            <ul>
+                <li class="flex text-gray-700 text-base">
+                    <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z"
+                            clip-rule="evenodd" />
+                    </svg>
+
+                    Requisito 1
+                </li>
+                <li class="flex text-gray-700 text-base">
+                    <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z"
+                            clip-rule="evenodd" />
+                    </svg>
+
+                    Requisito 2
+                </li>
+                <li class="flex ">
+                    <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z"
+                            clip-rule="evenodd" />
+                    </svg>
+
+
+                    Requisito 3
+                </li>
+                <li class="flex text-gray-700 text-base">
+                    <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path fill-rule="evenodd"
+                            d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z"
+                            clip-rule="evenodd" />
+                    </svg>
+
+                    Requisito 4
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h1 class="font-bold text-2xl">Descripción</h1>
+            <div class="text-gray-700 text-base">
+                {{course.description}}
+            </div>
+        </section>
+    </div>
+    <div>
+        <section class="bg-white shadow-lg rounded-sm overflow-hidden mb-4 px-4 py-2">
+            <div class="flex items-center gap-6">
+                <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="" alt="Imagen Prof">
+                <div>
+                    <h1 class="font-bold text-lg text-gray-500">Prof. Segundo Galdames</h1>
+                    <a class="text-blue-400 text-sm font-bold" href="">@segundogaldames</a>
+                </div>
+            </div>
+            <a href="" class="block mt-6 text-white text-center font-bold bg-blue-800 hover:bg-blue-600 box-border border border-transparent  shadow-xs leading-5 rounded-sm text-md px-4 py-2.5">Llevar Este Curso</a>
+        </section>
+        <aside>
+            {% for similar in similares %}
+                <article class="flex mb-6 gap-4">
+                    <img class="h-36 w-40 object-cover" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg" alt="">
+                    <div>
+                        <a class="font-bold text-2xl text-gray-600" href="{{BASE}}courses/course/{{similar.id}}"> {{similar.title}} </a>
+                        <div class="flex gap-4 items-center">
+                            <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="" alt="Imagen Prof">
+                            <p class="font-bold text-sm text-gray-500">Segundo Galdames</p>
+                    
+                        </div>
+                        <p class="flex mt-2">
+                            <svg class="w-6 h-6 text-gray-800 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-width="2"
+                                    d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
+                            </svg> 5
+                        </p>
+                    </div>
+                </article>
+            {% endfor %}
+        </aside>
+    </div>
+</div>
+{% else %}
+<p class="text-center text-gray-500 col-span-4">El curso no está disponible</p>
+{% endif %}
+{% endblock %}

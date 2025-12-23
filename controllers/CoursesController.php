@@ -62,4 +62,17 @@ class CoursesController extends Controller
             'courses' => Course::with(['category','level'])->where('level_id', $level_id)->where('status_id', 1)->latest('id')->get()->toArray()
         ] );
     }
+
+    public function course($course = null)
+    {
+        $slug = Filter::sanitizeSlug($course);
+        $exist = Course::select('id','category_id')->where('slug', $slug)->first();
+        //Helper::debuger($exist);
+
+        $this->_view->load('courses/course',[
+            'title' => 'Detalle del Curso',
+            'course' => Course::with(['category','level','status'])->find((int) $exist->id)->toArray(),
+            'similares' => Course::with(['category','level'])->where('status_id', 1)->where('category_id', $exist->category_id)->where('id', '!=', $exist->id)->latest('id')->limit(3)->get()->toArray()
+        ] );
+    }
 }
