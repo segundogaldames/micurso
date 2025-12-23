@@ -101,5 +101,12 @@ class Filter
     {
         return preg_replace('/[^a-zA-Z0-9_]/', '', trim($string));
     }
+
+    public static function sanitizeSlug($string)
+    {
+        // Limpia espacios, convierte a minúsculas y solo permite a-z, 0-9 y guiones
+        $string = trim(strtolower($string));
+        return preg_replace('/[^a-z0-9-]/', '', $string);
+    }
 }
 

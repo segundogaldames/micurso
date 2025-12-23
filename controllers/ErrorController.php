@@ -16,8 +16,9 @@ class ErrorController extends Controller
 	public function error()
 	{
 		$route_back = "javascript:history.back()";
+		$message = "La página que buscas no existe o ha ocurrido un error.";
 
-		$this->_view->load('error/error', compact('route_back'));
+		$this->_view->load('error/error', compact('route_back', 'message'));
 	}
 
 	public function denied()

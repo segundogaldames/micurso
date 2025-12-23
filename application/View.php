@@ -20,7 +20,7 @@ class View
         $loader = new FilesystemLoader(ROOT . 'views');
         $this->_twig = new Environment($loader, [
             'debug' => true, // 👈 Esto activa el modo debug
-            'cache' => false // o pon tu ruta de cache si la usas
+            'cache' => false, // o pon tu ruta de cache si la usas
         ]);
 
         $this->_twig->addExtension(new DebugExtension());

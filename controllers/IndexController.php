@@ -21,7 +21,7 @@ class indexController extends Controller
 
 		$this->_view->load('index/index',[
 			'titulo' => 'Bienvenidos a E-Learning',
-			'courses' => Course::where('status_id', 3)->latest('id')->get()
+			'courses' => Course::with(['category','level'])->where('status_id', 1)->latest('id')->get()->toArray()
 		]);
 	}
 }

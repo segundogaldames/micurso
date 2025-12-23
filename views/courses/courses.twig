@@ -1,0 +1,127 @@
+{% extends "layout/home/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+<style>
+    .img-top {
+        background-image: url('{{BASE}}views/layout/home/img/portada3.jpg');
+
+    }
+</style>
+<section class="img-top bg-cover bg-center bg-contain h-[600px]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6" style="padding-top: 19rem;">
+        <div class="w-full md:w-3/4 lg:w-1/2">
+            <h1 class="text-white font-bold text-4xl">Los mejores cursos en español para ti</h1>
+            <p class="text-white text-lg mt-2 mb-4">Aquí encontrarás los mejores cursos para tu formación profesional
+                para crezcas y tengas mucho trabajo</p>
+
+            <form class="max-w-md mx-auto">
+                <label for="search" class="block mb-2.5 text-sm font-medium text-heading sr-only ">Buscar</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input type="search" id="search"
+                        class="block w-full p-3 ps-9 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                        placeholder="Search" required />
+                    <button type="submit"
+                        class="absolute end-1.5 bottom-1.5 text-white bg-blue-500 hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded text-xs px-3 py-1.5 focus:outline-none">Buscar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</section>
+<section class="bg-gray-200 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex gap-2">
+        <a href="{{BASE}}courses/courses" class="bg-white shadow h-12 px-4 py-3 rounded text-gray-700 text-sm flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                class="bi bi-grid-3x3-gap-fill mt-1 mr-2" viewBox="0 0 16 16">
+                <path
+                    d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z" />
+            </svg>
+            Todos los Cursos
+        </a>
+
+        <button id="dropdownButtonCategories" data-dropdown-toggle="dropdownCategories"
+            class="inline-flex items-center justify-center text-gray-700 bg-white shadow box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium font-medium leading-5 rounded text-sm px-4 py-2.5 focus:outline-none"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                class="bi bi-bookmark-fill mr-2" viewBox="0 0 16 16">
+                <path
+                    d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2" />
+            </svg>
+            Categorías
+            <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 9-7 7-7-7" />
+            </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div id="dropdownCategories" class="z-10 hidden bg-white border border-default-medium rounded shadow w-44">
+            <ul class="p-2 text-sm text-body text-gray-700 font-medium" aria-labelledby="dropdownButtonCategories">
+                {% for category in categories %}
+                    <li>
+                        <a href="{{BASE}}courses/coursesCategory/{{ category.slug }}"
+                            class="inline-flex items-center w-full p-2 hover:bg-gray-300 hover:text-heading rounded"> {{ category.name }} </a>
+                    </li>
+                    
+                {% endfor %}
+            </ul>
+        </div>
+
+        <button id="dropdownButtonLevels" data-dropdown-toggle="dropdownLevels"
+            class="inline-flex items-center justify-center text-gray-700 bg-white shadow box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium font-medium leading-5 rounded text-sm px-4 py-2.5 focus:outline-none"
+            type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                class="bi bi-diagram-3-fill mr-2" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5z" />
+            </svg>
+            Niveles
+            <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 9-7 7-7-7" />
+            </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div id="dropdownLevels" class="z-10 hidden bg-white border border-default-medium rounded shadow w-44">
+            <ul class="p-2 text-sm text-body text-gray-700 font-medium" aria-labelledby="dropdownButtonLevels">
+                {% for level in levels %}
+                    <li>
+                        <a href="{{BASE}}courses/coursesLevel/{{ level.slug }}"
+                            class="inline-flex items-center w-full p-2 hover:bg-gray-300 hover:text-heading rounded"> {{ level.name }} </a>
+                    </li>
+                    
+                {% endfor %}
+                
+            </ul>
+        </div>
+
+    </div>
+</section>
+<section class="my-4">
+    <h1 class="text-center text-gray-600 text-3xl">ÚLTIMOS CURSOS</h1>
+    <p class="text-center text-gray-500 text-sm mb-4">Revisa los últimos cursos publicados</p>
+
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        {% if courses is not empty %}
+           {% include "courses/_courses_list.twig" %}
+        {% else %}
+            <p class="text-center text-gray-500 col-span-4">No hay cursos disponibles en este momento.</p>
+        {% endif %}
+        
+        
+    </div>
+
+</section>
+{% endblock %}
