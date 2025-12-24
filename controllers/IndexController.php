@@ -21,7 +21,10 @@ class indexController extends Controller
 
 		$this->_view->load('index/index',[
 			'titulo' => 'Bienvenidos a E-Learning',
-			'courses' => Course::with(['category','level'])->where('status_id', 1)->latest('id')->get()->toArray()
+			'courses' => Course::with(['category','level'])->where('status_id', 1)->latest('id')->get()->toArray(),
+			'process' => 'courses/getCourses',
+			'send' => $this->encrypt($this->getForm()),
+			'module' => $this->encrypt('index')
 		]);
 	}
 }

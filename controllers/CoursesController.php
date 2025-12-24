@@ -34,7 +34,10 @@ class CoursesController extends Controller
             'title' => 'Todos Los Cursos',
             'categories' => Category::query()->get(['id','name','slug'])->toArray(),
             'levels' => Level::query()->get(['id','name','slug'])->toArray(),
-            'courses' => Course::with(['category','level'])->where('status_id', 1)->latest('id')->get()->toArray()
+            'courses' => Course::with(['category','level'])->where('status_id', 1)->latest('id')->get()->toArray(),
+            'send' => $this->encrypt($this->getForm()),
+            'process' => "courses/getCourses",
+            'module' => $this->encrypt('course')
         ] );
     }
 
@@ -42,12 +45,18 @@ class CoursesController extends Controller
     {
         $slug = Filter::sanitizeSlug($category);
         $category_id = Category::where('slug', $slug)->value('id');
+
+        //se crea variable de session para el buscador que esta en esta vista
+        Session::set('category', $slug);
         
         $this->_view->load('courses/coursesCategory',[
             'title' => 'Cursos por Categoria',
             'categories' => Category::query()->get(['id','name','slug'])->toArray(),
             'levels' => Level::query()->get(['id','name','slug'])->toArray(),
-            'courses' => Course::with(['category','level'])->where('category_id', $category_id)->where('status_id', 1)->latest('id')->get()->toArray()
+            'courses' => Course::with(['category','level'])->where('category_id', $category_id)->where('status_id', 1)->latest('id')->get()->toArray(),
+            'send' => $this->encrypt($this->getForm()),
+            'process' => "courses/getCourses",
+            'module' => $this->encrypt('category')
         ] );
     }
 
@@ -55,12 +64,18 @@ class CoursesController extends Controller
     {
         $slug = Filter::sanitizeSlug($level);
         $level_id = Level::where('slug', $slug)->value('id');
+
+        //se crea variable de session para el buscador que esta en esta vista
+        Session::set('level', $slug);
         
         $this->_view->load('courses/coursesLevel',[
             'title' => 'Cursos por Categoria',
             'categories' => Category::query()->get(['id','name','slug'])->toArray(),
             'levels' => Level::query()->get(['id','name','slug'])->toArray(),
-            'courses' => Course::with(['category','level'])->where('level_id', $level_id)->where('status_id', 1)->latest('id')->get()->toArray()
+            'courses' => Course::with(['category','level'])->where('level_id', $level_id)->where('status_id', 1)->latest('id')->get()->toArray(),
+            'send' => $this->encrypt($this->getForm()),
+            'process' => "courses/getCourses",
+            'module' => $this->encrypt('level')
         ] );
     }
 
@@ -117,5 +132,36 @@ class CoursesController extends Controller
 
         Flash::success('Te has inscrito correctamente en el curso.');
         $this->redirect('courses/course/'.$course->slug);
+    }
+
+    public function getCourses()
+    {
+        //Helper::debuger($_POST);
+        $search = Filter::getPost('search');
+        $module = $this->decrypt(Filter::getPost('module'));
+        $courses = Course::with(['category','level'])->where('title', 'LIKE', "%$search%")->where('status_id', 1)->get()->toArray();
+        
+        $route = match ($module) {
+            'course' => 'courses/courses',
+            'category' => 'courses/coursesCategory/' . Session::get('category'),
+            'level' => 'courses/coursesLevel/' . Session::get('level'),
+            'getCourses' => 'courses/getCourses',
+            default => 'index/index',
+        };
+        
+        if(!$courses) {
+            Flash::warning('El curso solicitado aún no está disponible. Solícitalo en la sección Contacto');
+            $this->redirect($route);
+        } 
+        
+        $this->_view->load('courses/getCourses',[
+            'courses' => $courses,
+            'categories' => Category::query()->get(['id','name','slug'])->toArray(),
+            'levels' => Level::query()->get(['id','name','slug'])->toArray(),
+            'title' => 'Cursos Seleccionados',
+            'send' => $this->encrypt($this->getForm()),
+            'process' => "courses/getCourses",
+            'module' => $this->encrypt('getCourses')
+        ]);
     }
 }
