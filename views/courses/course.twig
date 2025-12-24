@@ -36,7 +36,7 @@
                         d="M16 19h4a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-2m-2.236-4a3 3 0 1 0 0-4M3 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
 
-                Matriculados: 0
+                Matriculados: {{course_user}}
             </p>
             <p class="flex">
                 <svg class="w-6 h-6 text-gray-800 text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -226,6 +226,7 @@
     </div>
     <div>
         <section class="bg-white shadow-lg rounded-sm overflow-hidden mb-4 px-4 py-2">
+            {% include "partials/_messages.twig" %}
             <div class="flex items-center gap-6">
                 <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="" alt="Imagen Prof">
                 <div>
@@ -233,7 +234,17 @@
                     <a class="text-blue-400 text-sm font-bold" href="">@segundogaldames</a>
                 </div>
             </div>
-            <a href="" class="block mt-6 text-white text-center font-bold bg-blue-800 hover:bg-blue-600 box-border border border-transparent  shadow-xs leading-5 rounded-sm text-md px-4 py-2.5">Llevar Este Curso</a>
+            {% if status == 'no-matriculado' %}
+                <form action="{{BASE}}{{process}}" method="post">
+                    <input type="hidden" name="send" value="{{send}}">
+                    <input type="hidden" name="course" value="{{course.id}}">
+                    <button type="submit" class="w-full mt-6 text-white text-center font-bold bg-blue-800 hover:bg-blue-600 box-border border border-transparent  shadow-xs leading-5 rounded-sm text-md px-4 py-2.5">Llevar Este Curso</button>
+
+                </form>
+            {% else %}
+                  <a href="" class="block mt-6 text-white text-center font-bold bg-blue-800 hover:bg-blue-600 box-border border border-transparent  shadow-xs leading-5 rounded-sm text-md px-4 py-2.5">Continuar Este Curso</a>  
+            {% endif %}
+            
         </section>
         <aside>
             {% for similar in similares %}
