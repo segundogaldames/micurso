@@ -32,9 +32,9 @@ class CoursesController extends Controller
     {
         $this->_view->load('courses/courses',[
             'title' => 'Todos Los Cursos',
-            'categories' => Category::query()->get(['id','name','slug'])->toArray(),
-            'levels' => Level::query()->get(['id','name','slug'])->toArray(),
-            'courses' => Course::with(['category','level'])->where('status_id', 1)->latest('id')->get()->toArray(),
+            'categories' => Category::select('id','name','slug')->get(),
+            'levels' => Level::select('id','name','slug')->get(),
+            'courses' => Course::with(['category','level'])->where('status_id', 1)->latest('id')->get(),
             'send' => $this->encrypt($this->getForm()),
             'process' => "courses/getCourses",
             'module' => $this->encrypt('course')
@@ -51,9 +51,9 @@ class CoursesController extends Controller
         
         $this->_view->load('courses/coursesCategory',[
             'title' => 'Cursos por Categoria',
-            'categories' => Category::query()->get(['id','name','slug'])->toArray(),
-            'levels' => Level::query()->get(['id','name','slug'])->toArray(),
-            'courses' => Course::with(['category','level'])->where('category_id', $category_id)->where('status_id', 1)->latest('id')->get()->toArray(),
+            'categories' => Category::select('id','name','slug')->get(),
+            'levels' => Level::select('id','name','slug')->get(),
+            'courses' => Course::with(['category','level'])->where('category_id', $category_id)->where('status_id', 1)->latest('id')->get(),
             'send' => $this->encrypt($this->getForm()),
             'process' => "courses/getCourses",
             'module' => $this->encrypt('category')
@@ -70,9 +70,9 @@ class CoursesController extends Controller
         
         $this->_view->load('courses/coursesLevel',[
             'title' => 'Cursos por Categoria',
-            'categories' => Category::query()->get(['id','name','slug'])->toArray(),
-            'levels' => Level::query()->get(['id','name','slug'])->toArray(),
-            'courses' => Course::with(['category','level'])->where('level_id', $level_id)->where('status_id', 1)->latest('id')->get()->toArray(),
+            'categories' => Category::select('id','name','slug')->get(),
+            'levels' => Level::select('id','name','slug')->get(),
+            'courses' => Course::with(['category','level'])->where('level_id', $level_id)->where('status_id', 1)->latest('id')->get(),
             'send' => $this->encrypt($this->getForm()),
             'process' => "courses/getCourses",
             'module' => $this->encrypt('level')
@@ -94,8 +94,8 @@ class CoursesController extends Controller
 
         $this->_view->load('courses/course',[
             'title' => 'Detalle del Curso',
-            'course' => Course::with(['category','level','status'])->find((int) $exist->id)->toArray(),
-            'similares' => Course::with(['category','level'])->where('status_id', 1)->where('category_id', $exist->category_id)->where('id', '!=', $exist->id)->latest('id')->limit(3)->get()->toArray(),
+            'course' => Course::with(['category','level','status'])->find((int) $exist->id),
+            'similares' => Course::with(['category','level'])->where('status_id', 1)->where('category_id', $exist->category_id)->where('id', '!=', $exist->id)->latest('id')->limit(3)->get(),
             'send' => $this->encrypt($this->getForm()),
             'process' => "courses/enrolled",
             'status' => $status,
@@ -139,7 +139,7 @@ class CoursesController extends Controller
         //Helper::debuger($_POST);
         $search = Filter::getPost('search');
         $module = $this->decrypt(Filter::getPost('module'));
-        $courses = Course::with(['category','level'])->where('title', 'LIKE', "%$search%")->where('status_id', 1)->get()->toArray();
+        $courses = Course::with(['category','level'])->where('title', 'LIKE', "%$search%")->where('status_id', 1)->get();
         
         $route = match ($module) {
             'course' => 'courses/courses',
@@ -156,12 +156,23 @@ class CoursesController extends Controller
         
         $this->_view->load('courses/getCourses',[
             'courses' => $courses,
-            'categories' => Category::query()->get(['id','name','slug'])->toArray(),
-            'levels' => Level::query()->get(['id','name','slug'])->toArray(),
+            'categories' => Category::select('id','name','slug')->get(),
+            'levels' => Level::select('id','name','slug')->get(),
             'title' => 'Cursos Seleccionados',
             'send' => $this->encrypt($this->getForm()),
             'process' => "courses/getCourses",
             'module' => $this->encrypt('getCourses')
+        ]);
+    }
+
+    public function status($course = null)
+    {
+        $slug = Filter::sanitizeSlug($course);
+        $exist = Course::select('id','category_id')->where('slug', $slug)->first();
+
+        $this->_view->load('courses/status',[
+            'title' => 'Detalle del Curso',
+            'course' => Course::with(['category','level','status'])->find((int) $exist->id),
         ]);
     }
 }

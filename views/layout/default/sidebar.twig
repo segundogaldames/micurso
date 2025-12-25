@@ -2,12 +2,12 @@
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="./index.html" class="brand-link">
+        <a href="{{BASE}}admin" class="brand-link">
             <!--begin::Brand Image-->
-            <img src="./assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
+            <img src="{{BASE}}views/layout/default/img/android-chrome-512x512.png" alt="MIAcademy" class="brand-image opacity-75 shadow" />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">AdminLTE 4</span>
+            <span class="brand-text fw-light">MIAcademy</span>
             <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->
@@ -23,15 +23,21 @@
                     <a href="#" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>
-                            Dashboard
+                            Administración
                             <i class="nav-arrow bi bi-chevron-right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
-                                <p>Dashboard v1</p>
+                            <a href="{{BASE}}admin" class="nav-link active">
+                                <i class="bi bi-speedometer2"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{BASE}}roles" class="nav-link">
+                                <i class="bi bi-person-fill-lock"></i>
+                                <p>Roles</p>
                             </a>
                         </li>
                         <li class="nav-item">

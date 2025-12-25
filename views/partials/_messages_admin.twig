@@ -1,0 +1,9 @@
+{% if flash_messages %}
+    {% for flash in flash_messages %}
+        <div id="alert-{{ loop.index }}" class="" role="alert">
+            <div class="ms-3 text-sm font-medium">
+                {{ flash.message|raw }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

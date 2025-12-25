@@ -3,6 +3,7 @@
 namespace application;
 
 use application\PasswordStrengthValidator;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Validator
 {
@@ -242,6 +243,28 @@ class Validator
                 // Valida hora en formato 24h: HH:MM o HH:MM:SS
                 if (!is_string($value) || !preg_match('/^(2[0-3]|[01]\d):[0-5]\d(:[0-5]\d)?$/', $value)) {
                     $this->errors[$field] = "El campo $field debe ser una hora válida (HH:MM o HH:MM:SS).";
+                    return false;
+                }
+                break;
+
+            case 'unique':
+                if (!$param) {
+                    throw new \InvalidArgumentException("La regla unique requiere parámetros: unique:table,column[,exceptId].");
+                }
+
+                $parts = explode(',', $param);
+                $table = trim($parts[0]);
+                $column = isset($parts[1]) && $parts[1] !== '' ? trim($parts[1]) : $field;
+                $exceptId = isset($parts[2]) && $parts[2] !== '' ? trim($parts[2]) : null;
+
+                $query = Capsule::table($table)->where($column, $value);
+
+                if ($exceptId !== null) {
+                    $query->where('id', '<>', $exceptId);
+                }
+
+                if ($query->exists()) {
+                    $this->errors[$field] = "El campo $field ya está en uso.";
                     return false;
                 }
                 break;

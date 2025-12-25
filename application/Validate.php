@@ -5,17 +5,31 @@ use application\Filter;
 
 class Validate
 {
-    public static function validateModel($model, $id, $route)
+    /**
+     * Valida y retorna la instancia del modelo.
+     *
+     * @param string $model Nombre de la clase modelo (ej: Role::class)
+     * @param mixed $idOrInstance Id del registro o la instancia del modelo
+     * @param string $route Ruta a redirigir si no existe
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public static function validateModel($model, $idOrInstance, $route)
     {
-        //print_r($route);exit;
-        if ($id) {
-            $instance = $model::select('id')->find((int) $id);
+        // Si ya nos pasaron una instancia, la devolvemos
+        if (is_object($idOrInstance)) {
+            return $idOrInstance;
+        }
 
+        // Si recibimos un id, buscamos el modelo
+        if ($idOrInstance) {
+            $instance = $model::find((int) $idOrInstance);
             if ($instance) {
-                return true;
+                return $instance;
             }
         }
 
+        // Si no existe, redirigimos al listado (comportamiento previo)
         header('Location: ' . BASE_URL . $route);
+        exit;
     }
 }

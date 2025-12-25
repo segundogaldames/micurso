@@ -1,0 +1,45 @@
+{% extends "layout/home/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+<div class="mt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {# lado central #}
+        <div class="span-2">
+            {{course.title}}
+        </div>
+        {# lado derecho #}
+        <div class="bg-white shadow-lg rounded-sm overflow-hidden mb-4 px-4 py-2">
+            {# presentacion del curso y del profesor #}
+            <h1 class="font-bold text-lg text-gray-500"> {{course.title}} </h1>
+            <div class="flex items-center gap-6">
+                <img class="h-12 w-12 object-cover rounded-full shadow-lg" src="" alt="Imagen Prof">
+                <div>
+                    <h1 class="font-bold text-lg text-gray-500">Prof. Segundo Galdames</h1>
+                    <a class="text-blue-400 text-sm font-bold" href="">@segundogaldames</a>
+                </div>
+            </div>
+            {# secciones y contenidos del curso #}
+            <hr class="mt-4 bg-gray-700">
+            <h1 class="font-bold text-lg text-gray-500">Contenidos</h1>
+            <ul>
+                <li class="font-bold">
+                    Seccion 1
+                    <ul>
+                        <li class="text-sm text-gray-400">Leccion 1</li>
+                        <li class="text-sm text-gray-400">Leccion 2</li>
+                        <li class="text-sm text-gray-400">Leccion 3</li>
+                    </ul>
+                </li>
+                <li class="font-bold">
+                    Seccion 2
+
+                </li>
+                <li class="font-bold">
+                    Seccion 3
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
