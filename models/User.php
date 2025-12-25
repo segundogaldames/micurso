@@ -10,11 +10,18 @@ class User extends Model
     protected $table = 'users';
     protected $fillable = [];
 
+    //uno a uno
+    public function image()
+    {
+        return $this->hasOne(Image::class);
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
 
+    //uno a muchos
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -28,11 +35,6 @@ class User extends Model
     public function courseUsers()
     {
         return $this->hasMany(CourseUser::class);
-    }
-
-    public function image()
-    {
-        return $this->hasOne(Image::class);
     }
 
     public function likes()

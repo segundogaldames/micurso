@@ -6,6 +6,8 @@ use application\Validator;
 use application\Filter;
 use application\Request;
 use application\View;
+use models\Module;
+use models\Permission;
 
 class Controller
 {
@@ -76,6 +78,17 @@ class Controller
 		return $msg ? $msg : ['type' => '', 'text' => ''];
 	}
 
+    protected function getModule($module)
+    {
+        $module = Module::select('id')->where('nombre',$module)->exists();
+        
+        if (!$module) {
+            $this->redirect('error/denied');
+        }
+
+        return $module->id;
+    }
+
     protected function redirect(string $route = ''): void
     {
         $url = BASE_URL . ($route ?: '');
@@ -124,7 +137,7 @@ class Controller
 		}
 	}
 
-    protected function validateRol($roles){
+    protected function validateRole($roles){
 
 		if (is_array($roles)) {
 			foreach ($roles as $role) {
@@ -136,6 +149,29 @@ class Controller
 
 		$this->redirect('error/denied');
 	}
+
+    protected function validatePermission($module, $task)
+    {
+        $permissions = Permission::with(['module','role','task'])->where('module_id',(int) $module)->get();
+        //print_r($permisos);exit;
+        if ($permissions->isEmpty()) {
+            $this->redirect('error/denied');
+        }
+
+        $roles = [];
+
+        foreach ($permissions as $permission) {
+            if ($permission->task->name == $task) {
+                $roles[] = $permission->role->name;
+            }
+        }
+
+        if (empty($roles)) {
+            $this->redirect('error/denied');
+        }
+
+        $this->validateRole($roles);
+    }
 
     protected function validateSession(){
 		if (!Session::get('authenticate')) {

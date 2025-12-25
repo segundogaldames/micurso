@@ -12,13 +12,18 @@ use models\Role;
 
 class RolesController extends Controller
 {
+    private $_module;
+
     public function __construct()
     {
+        //$this->validateSession();
         parent::__construct(); 
+        //$this->_module = $this->getModule('Role');
     }
 
     public function index()
     {
+        //$this->validatePermission($this->_module, 'Leer');
         $this->_view->load('roles/index', [
             'title' => 'Roles',
             'roles'  => Role::select('id','name')->get(),
