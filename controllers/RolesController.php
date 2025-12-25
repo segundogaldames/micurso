@@ -32,7 +32,8 @@ class RolesController extends Controller
     public function create()
     {
         $this->_view->load('roles/create', [
-            'title' => 'Nuevo Rol',
+            'title' => 'Roles',
+            'subject' => 'Nuevo Rol',
             'role' => Session::get('form_data') ?? [],
             'send'   => $this->encrypt($this->getForm()),
             'process' => "roles/store",
@@ -66,6 +67,7 @@ class RolesController extends Controller
 
         $this->_view->load('roles/show', [
             'title' => 'Roles',
+            'subject' => 'Detalle Rol',
             'role'  => $role
         ]);
     }
@@ -76,6 +78,7 @@ class RolesController extends Controller
 
         $this->_view->load('roles/edit', [
             'title' => 'Roles',
+            'subject' => 'Editar Rol',
             'role'   => $role,
             'send'   => $this->encrypt($this->getForm()),
             'process' => "roles/update/$id",

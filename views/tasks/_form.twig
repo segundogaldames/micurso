@@ -2,10 +2,10 @@
     <!--begin::Body-->
     <div class="card-body">
         <div class="mb-3">
-            <label for="role" class="form-label">Rol</label>
-            <input type="text" name="name" value="{{role.name|default("")}}" class="form-control" id="role" aria-describedby="role" placeholder="Nombre del rol" />
+            <label for="tarea" class="form-label">Tarea</label>
+            <input type="text" name="name" value="{{task.name|default("")}}" class="form-control" id="tarea" aria-describedby="tarea" placeholder="Nombre de la tarea" />
             <div id="role" class="form-text text-danger">
-                Ingrese el nombre del rol
+                Ingrese el nombre de la tarea
             </div>
         </div>
         
@@ -16,7 +16,7 @@
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="send" value="{{send}}">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{{BASE}}roles" class="btn btn-primary">Volver</a>
+        <a href="{{BASE}}tareas" class="btn btn-primary">Volver</a>
     </div>
     <!--end::Footer-->
 </form>

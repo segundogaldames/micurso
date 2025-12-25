@@ -1,9 +1,29 @@
-{% if flash_messages %}
-    {% for flash in flash_messages %}
-        <div id="alert-{{ loop.index }}" class="" role="alert">
-            <div class="ms-3 text-sm font-medium">
-                {{ flash.message|raw }}
-            </div>
+{# views/partials/flash_messages.twig #}
+
+{% for msg in flash_messages %}
+    {% if ui_framework == 'flowbite' %}
+        {# DISEÑO FLOWBITE #}
+        {% set classes = {
+            'success': 'p-4 mb-4 text-green-800 border border-green-300 bg-green-50 dark:bg-gray-800 dark:text-green-400',
+            'error':   'p-4 mb-4 text-red-800 border border-red-300 bg-red-50 dark:bg-gray-800 dark:text-red-400',
+            'warning': 'p-4 mb-4 text-yellow-800 border border-yellow-300 bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400',
+            'info':    'p-4 mb-4 text-blue-800 border border-blue-300 bg-blue-50 dark:bg-gray-800 dark:text-blue-400'
+        } %}
+        <div class="flex items-center {{ classes[msg.type] }} rounded-lg" role="alert">
+            <div class="ms-3 text-sm font-medium">{{ msg.message }}</div>
         </div>
-    {% endfor %}
-{% endif %}
+
+    {% else %}
+        {# DISEÑO ADMINLTE (BOOTSTRAP) #}
+        {% set classes = {
+            'success': 'alert-success',
+            'error':   'alert-danger',
+            'warning': 'alert-warning',
+            'info':    'alert-info'
+        } %}
+        <div class="alert {{ classes[msg.type] }} alert-dismissible fade show" role="alert">
+            {{ msg.message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+{% endfor %}

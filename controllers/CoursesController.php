@@ -136,11 +136,11 @@ class CoursesController extends Controller
 
     public function getCourses()
     {
-        //Helper::debuger($_POST);
         $search = Filter::getPost('search');
         $module = $this->decrypt(Filter::getPost('module'));
         $courses = Course::with(['category','level'])->where('title', 'LIKE', "%$search%")->where('status_id', 1)->get();
         
+        //Helper::debuger($module);
         $route = match ($module) {
             'course' => 'courses/courses',
             'category' => 'courses/coursesCategory/' . Session::get('category'),
@@ -149,7 +149,7 @@ class CoursesController extends Controller
             default => 'index/index',
         };
         
-        if(!$courses) {
+        if($courses->isEmpty()) {
             Flash::warning('El curso solicitado aún no está disponible. Solícitalo en la sección Contacto');
             $this->redirect($route);
         } 

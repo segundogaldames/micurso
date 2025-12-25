@@ -15,32 +15,32 @@
             </div>
             <div class="card-body">
                 {% include "partials/_messages_admin.twig" %}
-                {% if role is not empty %}
+                {% if task is not empty %}
                     <table class="table table-hover">
                         <tr>
                             <th>Id:</th>
-                            <td> {{role.id}} </td>
+                            <td> {{task.id}} </td>
                         </tr>
                         <tr>
                             <th>Rol:</th>
-                            <td> {{role.name}} </td>
+                            <td> {{task.name}} </td>
                         </tr>
                         <tr>
                             <th>Creado:</th>
-                            <td> {{role.created_at|date("d-m-Y H:i:s")}} </td>
+                            <td> {{task.created_at|date("d-m-Y H:i:s")}} </td>
                         </tr>
                         <tr>
                             <th>Modificado:</th>
-                            <td> {{role.updated_at|date("d-m-Y H:i:s")}} </td>
+                            <td> {{task.updated_at|date("d-m-Y H:i:s")}} </td>
                         </tr>
                     </table>
                 {% else %}
-                    <p class="text-secondary fs-4">No hay rol disponible</p>
+                    <p class="text-secondary fs-4">No hay tarea disponible</p>
                 {% endif %}
                 
             </div>
         </div>
-        <a href="{{BASe}}roles" class="btn btn-primary">Volver</a>
+        <a href="{{BASe}}tasks" class="btn btn-primary">Volver</a>
     </div>
     <!--end::Container-->
 </div>
