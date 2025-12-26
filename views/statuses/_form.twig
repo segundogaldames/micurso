@@ -1,0 +1,22 @@
+<form action="{{BASE}}{{process}}" method="post">
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="status" class="form-label">EStado</label>
+            <input type="text" name="name" value="{{status.name|default("")}}" class="form-control" id="status" aria-describedby="status" placeholder="Nombre del estado" />
+            <div id="status" class="form-text text-danger">
+                Ingrese el nombre del estado
+            </div>
+        </div>
+        
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <div class="card-footer">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{send}}">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{BASE}}statuses" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Footer-->
+</form>
