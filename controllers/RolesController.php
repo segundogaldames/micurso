@@ -16,14 +16,15 @@ class RolesController extends Controller
 
     public function __construct()
     {
-        //$this->validateSession();
+        $this->validateSession();
         parent::__construct(); 
-        //$this->_module = $this->getModule('Role');
+        $this->_module = $this->getModule('Role');
     }
 
     public function index()
     {
-        //$this->validatePermission($this->_module, 'Leer');
+        //Helper::debuger($this->_module);
+        $this->validatePermission($this->_module, 'Listar');
         $this->_view->load('roles/index', [
             'title' => 'Roles',
             'roles'  => Role::select('id','name')->get(),
@@ -36,6 +37,7 @@ class RolesController extends Controller
 
     public function create()
     {
+        $this->validatePermission($this->_module, 'Crear');
         $this->_view->load('roles/create', [
             'title' => 'Roles',
             'subject' => 'Nuevo Rol',
@@ -48,6 +50,7 @@ class RolesController extends Controller
 
     public function store()
     {
+        $this->validatePermission($this->_module, 'Crear');
         $data = [
             'name' => Filter::getPost('name')
         ];
@@ -68,6 +71,7 @@ class RolesController extends Controller
 
     public function show($id = null)
     {
+        $this->validatePermission($this->_module, 'Leer');
         $role = Validate::validateModel(Role::class, $id, 'roles');
 
         $this->_view->load('roles/show', [
@@ -79,6 +83,7 @@ class RolesController extends Controller
 
     public function edit($id = null)
     {
+        $this->validatePermission($this->_module, 'Editar');
         $role = Validate::validateModel(Role::class, $id, 'roles');
 
         $this->_view->load('roles/edit', [
@@ -86,13 +91,14 @@ class RolesController extends Controller
             'subject' => 'Editar Rol',
             'role'   => $role,
             'send'   => $this->encrypt($this->getForm()),
-            'process' => "roles/update/$id",
+            'process' => "roles/update/{$id}",
             'action' => 'edit',
         ]);
     }
 
     public function update($id = null)
     {
+        $this->validatePermission($this->_module, 'Editar');
         $this->validatePUT();
         $role = Validate::validateModel(Role::class, $id, 'roles');
 

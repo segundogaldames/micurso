@@ -75,6 +75,7 @@ final class LoginController extends Controller
         Session::set('user_id', $user->id);
         Session::set('user_email', $user->email);
         Session::set('user_name', $user->name);
+        Session::set('user_image', $user->image);
         Session::set('user_role', $user->role->name);
         Session::set('time', time());
 
@@ -89,6 +90,6 @@ final class LoginController extends Controller
     public function logout()
     {
         Session::destroy();
-        $this->redirect('login/login');
+        $this->redirect();
     }
 }

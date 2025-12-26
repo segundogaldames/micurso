@@ -78,13 +78,14 @@ class Controller
 		return $msg ? $msg : ['type' => '', 'text' => ''];
 	}
 
-    protected function getModule($module)
+    protected function getModule($mod)
     {
-        $module = Module::select('id')->where('nombre',$module)->exists();
+        $module = Module::select('id')->where('name',$mod)->first();
         
         if (!$module) {
             $this->redirect('error/denied');
         }
+        //Helper::debuger($module);
 
         return $module->id;
     }
@@ -152,6 +153,7 @@ class Controller
 
     protected function validatePermission($module, $task)
     {
+        //Helper::debuger($module);
         $permissions = Permission::with(['module','role','task'])->where('module_id',(int) $module)->get();
         //print_r($permisos);exit;
         if ($permissions->isEmpty()) {
