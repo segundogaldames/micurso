@@ -48,10 +48,11 @@ class Helper
 
         //Reemplazamos la N, n, C y c
         $string = str_replace(
-        array('Ñ', 'ñ', 'Ç', 'ç',',','.',';',':'),
-        array('N', 'n', 'C', 'c','','','',''),
+        array('Ñ', 'ñ', 'Ç', 'ç',',','.',';',':','?','!'),
+        array('N', 'n', 'C', 'c','','','','','',''),
         $string
         );
+
         return $string;
     }
 
@@ -94,6 +95,16 @@ class Helper
         }
 
         return false;
+    }
+
+    public static function getTitle($text)
+    {
+        if ($text) {
+            # code...
+            $text = mb_convert_case($text, MB_CASE_TITLE, "UTF-8");
+        }
+
+        return $text;
     }
 
     #metodo que crea una password de 10 caracteres de largo

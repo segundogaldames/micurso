@@ -34,7 +34,7 @@ class PermissionsController extends Controller
         $module = Validate::validateModel(Module::class, $mod, 'modules');
         $this->_view->load('permissions/permissionsModule', [
             'title' => 'Permisos',
-            'permissions'  => Permission::with(['module','role','task'])->get(),
+            'permissions'  => Permission::with(['module','role','task'])->where('module_id',$module->id)->get(),
             'subject' => 'Lista de Permisos',
             'action' =>  'index',
             'route_create' => "permissions/create/$mod",

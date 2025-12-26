@@ -14,6 +14,8 @@ class TasksController extends Controller
 {
     public function __construct()
     {
+        $this->validateSession();
+        $this->validateRole(['Administrador']);
         parent::__construct(); 
     }
 

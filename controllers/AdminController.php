@@ -8,6 +8,8 @@ class AdminController extends Controller
 {
     public function __construct()
     {
+        $this->validateSession();
+        $this->validateRole(['Administrador','Instructor']);
         return parent::__construct();
     }
 
