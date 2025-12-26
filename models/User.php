@@ -10,8 +10,14 @@ class User extends Model
     protected $table = 'users';
     protected $fillable = [];
 
+    //pertenece a 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+    
     //uno a uno
-    public function image()
+    public function imageRelation()
     {
         return $this->hasOne(Image::class);
     }

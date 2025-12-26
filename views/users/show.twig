@@ -1,0 +1,74 @@
+{% extends "layout/default/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<div class="app-content">
+    <!--begin::Container-->
+    <div class="container-fluid">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h1 class="fs-3">
+                    {{subject}}
+                </h1>
+                
+            </div>
+            <div class="card-body">
+                {% include "partials/_messages_admin.twig" %}
+                {% if user is not empty %}
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Imagen:</th>
+                            <td> 
+                                <img src="{{ BASE }}public/img/users/{{ user.image }}" alt="Imagen Usuario" class="img-thumbnail" width="120">
+                                <a href="{{BASE}}users/editImage/{{user.id}}" class="btn btn-outline-secondary btn-sm">Cambiar Imagen</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Id:</th>
+                            <td> {{user.id}} </td>
+                        </tr>
+                        <tr>
+                            <th>Nombre:</th>
+                            <td> {{user.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td> {{user.email}} </td>
+                        </tr>
+                        <tr>
+                            <th>Rol:</th>
+                            <td> {{user.role.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Activo:</th>
+                            <td>
+                                {% if user.active == 1 %}
+                                    Si
+                                {% else %}
+                                    No
+                                {% endif %}
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Creado:</th>
+                            <td> {{user.created_at|date("d-m-Y H:i:s")}} </td>
+                        </tr>
+                        <tr>
+                            <th>Modificado:</th>
+                            <td> {{user.updated_at|date("d-m-Y H:i:s")}} </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <p class="text-secondary fs-4">No hay usuario disponible</p>
+                {% endif %}
+                
+            </div>
+        </div>
+        <a href="{{BASE}}users" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Container-->
+</div>
+
+{% endblock %}
