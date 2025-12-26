@@ -8,9 +8,6 @@ use application\Filter;
 use application\Flash;
 use application\Validate;
 use application\Password;
-use models\EmpresaPersona;
-use models\Usuario;
-use models\Persona;
 use models\User;
 
 final class LoginController extends Controller
@@ -46,7 +43,7 @@ final class LoginController extends Controller
             $this->redirect();
         }
 
-        $fields = [
+        $data = [
             'email' => Filter::getPost('email'),
             'password' => Filter::getPostRaw('password')
         ];
@@ -56,9 +53,10 @@ final class LoginController extends Controller
             'password' => 'required'
         ];
 
-        $this->validateForm('login/login', $fields, $rules);
+        $this->validateForm('login/login', $data, $rules);
 
-        $user = User::where('email', Filter::getPost('email'))
+        $user = User::with('role')
+            ->where('email', $data['email'])
             ->where('active', 1)
             ->first();
 
@@ -81,7 +79,11 @@ final class LoginController extends Controller
         Session::set('time', time());
 
         Flash::success('Bienvenido(a)');
-        $this->redirect('admin');
+        if($user->role_id == 1 || $user->role_id == 3 ){
+            $this->redirect('admin');
+        }
+
+        $this->redirect();
     }
 
     public function logout()
