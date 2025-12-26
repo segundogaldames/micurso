@@ -75,7 +75,7 @@ class CategoriesController extends Controller
     public function show($id = null)
     {
         $this->validatePermission($this->_module, 'Leer');
-        $category = Validate::validateModel(Category::class, $id, 'roles');
+        $category = Validate::validateModel(Category::class, $id, 'categories');
 
         $this->_view->load('categories/show', [
             'title' => 'Categorias',
@@ -89,7 +89,7 @@ class CategoriesController extends Controller
     public function edit($id = null)
     {
         $this->validatePermission($this->_module, 'Editar');
-        $category = Validate::validateModel(Category::class, $id, 'roles');
+        $category = Validate::validateModel(Category::class, $id, 'categories');
 
         $this->_view->load('categories/edit', [
             'title' => 'Categorias',
@@ -105,7 +105,7 @@ class CategoriesController extends Controller
     {
         $this->validatePermission($this->_module, 'Editar');
         $this->validatePUT();
-        $category = Validate::validateModel(Category::class, $id, 'roles');
+        $category = Validate::validateModel(Category::class, $id, 'categories');
 
         $data = [
             'name' => Filter::getPost('name')

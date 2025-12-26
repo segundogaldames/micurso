@@ -1,0 +1,22 @@
+<form action="{{BASE}}{{process}}" method="post">
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="level" class="form-label">Nivel</label>
+            <input type="text" name="name" value="{{level.name|default("")}}" class="form-control" id="level" aria-describedby="level" placeholder="Nombre del nivel" />
+            <div id="role" class="form-text text-danger">
+                Ingrese el nombre del nivel
+            </div>
+        </div>
+        
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <div class="card-footer">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{send}}">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{BASE}}levels" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Footer-->
+</form>
