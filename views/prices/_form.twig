@@ -1,0 +1,28 @@
+<form action="{{BASE}}{{process}}" method="post">
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" name="name" value="{{price.name|default("")}}" class="form-control" id="name" aria-describedby="name" placeholder="Nombre del precio" />
+            <div id="name" class="form-text text-danger">
+                Ingrese el nombre del precio
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="value" class="form-label">Valor</label>
+            <input type="text" name="value" value="{{price.value|default("")}}" class="form-control" id="value" aria-describedby="value" placeholder="Valor del precio" />
+            <div id="value" class="form-text text-danger">
+                Ingrese el valor del precio
+            </div>
+        </div>
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <div class="card-footer">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{send}}">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{BASE}}prices" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Footer-->
+</form>

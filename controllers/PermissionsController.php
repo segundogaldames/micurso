@@ -36,6 +36,7 @@ class PermissionsController extends Controller
             'title' => 'Permisos',
             'permissions'  => Permission::with(['module','role','task'])->where('module_id',$module->id)->get(),
             'subject' => 'Lista de Permisos',
+            'module' => $module,
             'action' =>  'index',
             'route_create' => "permissions/create/$mod",
             'button_create' => 'Nuevo Permiso'
