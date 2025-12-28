@@ -9,6 +9,7 @@ class Course extends Model
     protected $table = 'courses';
     protected $fillable = [];
 
+    //pertenece a
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -28,6 +29,13 @@ class Course extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    //uno a muchos
 
     public function audiences()
     {
@@ -59,8 +67,5 @@ class Course extends Model
         return $this->hasMany(Section::class);
     }
 
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
+    
 }

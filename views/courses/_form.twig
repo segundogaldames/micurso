@@ -1,0 +1,119 @@
+<form action="{{BASE}}{{process}}" method="post" enctype="multipart/form-data">
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="title" class="form-label">Título</label>
+            <input type="text" name="title" value="{{course.title|default("")}}" class="form-control" id="title"
+                aria-describedby="title" placeholder="Título del curso" />
+            <div id="title" class="form-text text-danger">
+                Ingrese el título del curso
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="subtitle" class="form-label">Subtítulo</label>
+            <input type="text" name="subtitle" value="{{course.subtitle|default("")}}" class="form-control"
+                id="subtitle" aria-describedby="subtitle" placeholder="Subtítulo del curso" />
+            <div id="subtitle" class="form-text text-danger">
+                Ingrese el subtítulo del curso
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea name="description" id="description" aria-describedby="description" class="form-control" rows="4"
+                placeholder="Descripción del curso">
+                {{course.description}}
+            </textarea>
+            <div id="subtitle" class="form-text text-danger">
+                Ingrese la descripción del curso
+            </div>
+        </div>
+        {% if action == 'edit' %}
+            <div class="mb-3">
+                <label for="status" class="form-label">Estado</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="{{course.status_id}}"> {{course.status.name}} </option>
+                    <option value="">Seleccione un estado</option>
+                    {% for status in statuses %}
+                    <option value="{{status.id}}"> {{status.name}} </option>
+                    {% endfor %}
+
+                </select>
+                <div id="subtitle" class="form-text text-danger">
+                    Seleccione el estado del curso
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Categoría</label>
+            <select name="category" id="category" class="form-control">
+                {% if action == 'edit' %}
+                <option value="{{course.category_id}}"> {{course.category.name}} </option>
+                {% endif %}
+
+                <option value="">Seleccione una categoría</option>
+                {% for category in categories %}
+                <option value="{{category.id}}"> {{category.name}} </option>
+                {% endfor %}
+
+            </select>
+            <div id="subtitle" class="form-text text-danger">
+                Seleccione la categoría del curso
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="level" class="form-label">Nivel</label>
+            <select name="level" id="level" class="form-control">
+                {% if action == 'edit' %}
+                <option value="{{course.level_id}}"> {{course.level.name}} </option>
+                {% endif %}
+
+                <option value="">Seleccione un nivel</option>
+                {% for level in levels %}
+                <option value="{{level.id}}"> {{level.name}} </option>
+                {% endfor %}
+
+            </select>
+            <div id="subtitle" class="form-text text-danger">
+                Seleccione el nivel del curso
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Precio $</label>
+            <select name="price" id="price" class="form-control">
+                {% if action == 'edit' %}
+                <option value="{{course.price_id}}"> {{course.price.name}} - {{course.price.value}} </option>
+                {% endif %}
+
+                <option value="">Seleccione un precio</option>
+                {% for price in prices %}
+                <option value="{{price.id}}"> {{price.name}} - ${{price.value}} </option>
+                {% endfor %}
+
+            </select>
+            <div id="subtitle" class="form-text text-danger">
+                Seleccione el precio del curso
+            </div>
+        </div>
+        {% if action == 'create' %}
+        <div class="mb-3">
+            <label for="image" class="form-label">Imagen (opcional)</label>
+            <input type="file" name="image" class="form-control" id="image" aria-describedby="image"
+                placeholder="Imagen del curso" />
+            <div id="image" class="form-text text-danger">
+                Ingrese la imagen del curso
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <div class="card-footer">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{send}}">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{BASE}}courses" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Footer-->
+</form>

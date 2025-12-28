@@ -17,40 +17,44 @@ class Helper
     {
         //Reemplazamos la A y a
         $string = str_replace(
-        array('Á', 'À', 'Â', 'Ä', 'á', 'à', 'ä', 'â', 'ª'),
-        array('A', 'A', 'A', 'A', 'a', 'a', 'a', 'a', 'a'),
-        $string
+            array('Á', 'À', 'Â', 'Ä', 'á', 'à', 'ä', 'â', 'ª'),
+            array('A', 'A', 'A', 'A', 'a', 'a', 'a', 'a', 'a'),
+            $string
         );
 
         //Reemplazamos la E y e
         $string = str_replace(
-        array('É', 'È', 'Ê', 'Ë', 'é', 'è', 'ë', 'ê'),
-        array('E', 'E', 'E', 'E', 'e', 'e', 'e', 'e'),
-        $string );
+            array('É', 'È', 'Ê', 'Ë', 'é', 'è', 'ë', 'ê'),
+            array('E', 'E', 'E', 'E', 'e', 'e', 'e', 'e'),
+            $string
+        );
 
         //Reemplazamos la I y i
         $string = str_replace(
-        array('Í', 'Ì', 'Ï', 'Î', 'í', 'ì', 'ï', 'î'),
-        array('I', 'I', 'I', 'I', 'i', 'i', 'i', 'i'),
-        $string );
+            array('Í', 'Ì', 'Ï', 'Î', 'í', 'ì', 'ï', 'î'),
+            array('I', 'I', 'I', 'I', 'i', 'i', 'i', 'i'),
+            $string
+        );
 
         //Reemplazamos la O y o
         $string = str_replace(
-        array('Ó', 'Ò', 'Ö', 'Ô', 'ó', 'ò', 'ö', 'ô'),
-        array('O', 'O', 'O', 'O', 'o', 'o', 'o', 'o'),
-        $string );
+            array('Ó', 'Ò', 'Ö', 'Ô', 'ó', 'ò', 'ö', 'ô'),
+            array('O', 'O', 'O', 'O', 'o', 'o', 'o', 'o'),
+            $string
+        );
 
         //Reemplazamos la U y u
         $string = str_replace(
-        array('Ú', 'Ù', 'Û', 'Ü', 'ú', 'ù', 'ü', 'û'),
-        array('U', 'U', 'U', 'U', 'u', 'u', 'u', 'u'),
-        $string );
+            array('Ú', 'Ù', 'Û', 'Ü', 'ú', 'ù', 'ü', 'û'),
+            array('U', 'U', 'U', 'U', 'u', 'u', 'u', 'u'),
+            $string
+        );
 
         //Reemplazamos la N, n, C y c
         $string = str_replace(
-        array('Ñ', 'ñ', 'Ç', 'ç',',','.',';',':','?','!'),
-        array('N', 'n', 'C', 'c','','','','','',''),
-        $string
+            array('Ñ', 'ñ', 'Ç', 'ç', ',', '.', ';', ':', '?', '!'),
+            array('N', 'n', 'C', 'c', '', '', '', '', '', ''),
+            $string
         );
 
         return $string;
@@ -68,7 +72,7 @@ class Helper
     public static function friendlyRoute($value)
     {
         $route = strtolower(self::clearString($value));
-        $route = str_replace(' ','-', $route);
+        $route = str_replace(' ', '-', $route);
 
         return $route;
     }
@@ -97,6 +101,19 @@ class Helper
         return false;
     }
 
+    public static function getSentence($text)
+    {
+        if ($text) {
+            // 1. Limpiamos y pasamos todo a minúsculas (importante por si viene en MAYÚSCULAS)
+            $text = mb_strtolower(trim($text), "UTF-8");
+
+            // 2. Usamos mb_strtoupper para la primera letra y la concatenamos con el resto
+            $text = mb_strtoupper(mb_substr($text, 0, 1, "UTF-8"), "UTF-8") . mb_substr($text, 1, null, "UTF-8");
+        }
+
+        return $text;
+    }
+
     public static function getTitle($text)
     {
         if ($text) {
@@ -111,13 +128,13 @@ class Helper
     public static function passGenerator($length = 10)
     {
         $pass = "";
-        $lengthPass=$length;
+        $lengthPass = $length;
         $string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890$/.*";
-        $lengthString=strlen($string);
+        $lengthString = strlen($string);
 
-        for($i=1; $i<=$lengthPass; $i++) {
-            $pos=rand(0,$lengthString-1);
-            $pass .=substr($string,$pos,1);
+        for ($i = 1; $i <= $lengthPass; $i++) {
+            $pos = rand(0, $lengthString - 1);
+            $pass .= substr($string, $pos, 1);
         }
         return $pass;
     }
@@ -125,17 +142,17 @@ class Helper
     #metodo que limpia una cadena de diversos elementos
     public static function strClean($string)
     {
-        $string = preg_replace(['/\s+/','/^\s|\s$/'],[' ',''], $string);
+        $string = preg_replace(['/\s+/', '/^\s|\s$/'], [' ', ''], $string);
         $string = trim($string); //Elimina espacios en blanco al inicio y al final
         $string = stripslashes($string); // Elimina las \ invertidas
         $string = str_ireplace("<script>
-            ","
-            ",$string);
-            $string = str_ireplace("
-        </script>","",$string);
+            ", "
+            ", $string);
+        $string = str_ireplace("
+        </script>", "", $string);
         $string = str_ireplace("<script src>
-        ","
-        ",$string);
+        ", "
+        ", $string);
         $string = str_ireplace("<script type=>", "", $string);
         $string = str_ireplace("SELECT * FROM", "", $string);
         $string = str_ireplace("DELETE FROM", "", $string);
@@ -170,7 +187,7 @@ class Helper
         $r2 = bin2hex(random_bytes(10));
         $r3 = bin2hex(random_bytes(10));
         $r4 = bin2hex(random_bytes(10));
-        $token = $r1.'-'.$r2.'-'.$r3.'-'.$r4;
+        $token = $r1 . '-' . $r2 . '-' . $r3 . '-' . $r4;
         return $token;
     }
 

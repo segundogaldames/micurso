@@ -1,0 +1,100 @@
+{% extends "layout/default/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<div class="app-content">
+    <!--begin::Container-->
+    <div class="container-fluid">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h1 class="fs-3">
+                    {{subject}}
+                </h1>
+                
+            </div>
+            <div class="card-body">
+                {% include "partials/_messages_admin.twig" %}
+                {% if course is not empty %}
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Imagen:</th>
+                            <td> 
+                                <img src="{{ BASE }}public/img/courses/{{ course.image }}" alt="Imagen Curso" class="img-thumbnail img-fluid">
+                                <a href="{{BASE}}courses/editImage/{{course.id}}" class="btn btn-outline-secondary btn-sm">Cambiar Imagen</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Id:</th>
+                            <td> {{course.id}} </td>
+                        </tr>
+                        <tr>
+                            <th>Título:</th>
+                            <td> {{course.title}} </td>
+                        </tr>
+                        <tr>
+                            <th>Subtítulo:</th>
+                            <td> {{course.subtitle}} </td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td> {{course.description}} </td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td> {{course.status.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Categoría:</th>
+                            <td> {{course.category.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Nivel:</th>
+                            <td> {{course.level.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Precio:</th>
+                            <td>${{course.price.value}} - {{course.price.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Instructor:</th>
+                            <td>${{course.user.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Creado:</th>
+                            <td> {{course.created_at|date("d-m-Y H:i:s")}} </td>
+                        </tr>
+                        <tr>
+                            <th>Modificado:</th>
+                            <td> {{course.updated_at|date("d-m-Y H:i:s")}} </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <p class="text-secondary fs-4">No hay curso disponible</p>
+                {% endif %}
+                
+            </div>
+        </div>
+        <div class="row d-flex align-items-center">
+            <div class="col-auto">
+                <a href="{{BASE}}courses" class="btn btn-primary">Volver</a>
+            </div>
+            <div class="col-auto">
+                <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
+                    <input type="hidden" name="course" value="{{course.id}}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="send" value="{{send}}">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            function confirmDelete() {
+                return confirm("¿Estás seguro de eliminar este curso?");
+            }
+        </script>
+    </div>
+    <!--end::Container-->
+</div>
+
+{% endblock %}

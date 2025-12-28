@@ -19,7 +19,7 @@ class Validate
         if (is_object($idOrInstance)) {
             return $idOrInstance;
         }
-
+        
         // Si recibimos un id, buscamos el modelo
         if ($idOrInstance) {
             $instance = $model::find((int) $idOrInstance);
@@ -27,6 +27,7 @@ class Validate
                 return $instance;
             }
         }
+        //Helper::debuger($instance);
 
         // Si no existe, redirigimos al listado (comportamiento previo)
         header('Location: ' . BASE_URL . $route);

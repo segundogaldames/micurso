@@ -1,0 +1,76 @@
+{% extends "layout/default/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<div class="app-content">
+    <!--begin::Container-->
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="fs-3">
+                    {{subject}}
+                    {% if action == 'index' %}
+                    <a href="{{BASE}}{{route_create}}" class="btn btn-outline-secondary"> {{button_create}} </a>
+                    {% endif %}
+                </h1>
+
+            </div>
+            <div class="card-body">
+                {% include "partials/_messages_admin.twig" %}
+                {% if courses is not empty %}
+                <table class="table table-hover" id="myTable">
+                    <thead>
+                        <tr>
+                            <th class="col-1">Id</th>
+                            <th class="col-2">Nombre</th>
+                            <th class="col-2">Categoría</th>
+                            <th class="col-2">Nivel</th>
+                            <th class="col-2">Profesor</th>
+                            <th class="col-1">Precio</th>
+                            <th class="col-1">Estado</th>
+                            <th class="col-1">Actividades</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for model in courses %}
+                        <tr>
+                            <td> {{model.id}} </td>
+                            <td> {{model.title}} </td>
+                            <td> {{model.category.name}} </td>
+                            <td> {{model.level.name}} </td>
+                            <td> {{model.user.name}} </td>
+                            <td> $ {{model.price.value|number_format(0, ',', '.')}} </td>
+                            <td>
+                                {% set status_config = {
+                                    'Activo': {'color': 'success', 'icon': 'fa-check-circle'},
+                                    'Inactivo': {'color': 'danger', 'icon': 'fa-times-circle'},
+                                    'En Revisión': {'color': 'warning', 'icon': 'fa-clock'}
+                                    } 
+                                %}
+                                {% set config = status_config[model.status.name] | default({'color': 'secondary', 'icon': 'fa-info-circle'}) %}
+                                <span class="badge bg-{{ config.color }}">
+                                    <i class="fas {{ config.icon }}"></i> {{ model.status.name }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{BASE}}courses/show/{{model.id}}" class="btn btn-success btn-sm"><i
+                                        class="bi bi-eye"></i></a>
+                                <a href="{{BASE}}courses/edit/{{model.id}}" class="btn btn-warning btn-sm"><i
+                                        class="bi bi-pencil-square"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p class="text-secondary fs-4">No hay cursos disponibles</p>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <!--end::Container-->
+</div>
+
+{% endblock %}
