@@ -148,7 +148,7 @@ class Controller
 			}
 		}
 
-		$this->redirect('error/denied');
+		$this->redirect();
 	}
 
     protected function validatePermission($module, $task)

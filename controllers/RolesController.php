@@ -62,7 +62,7 @@ class RolesController extends Controller
         $this->validateForm('roles/create', $data, $rules);
 
         $role = new Role();
-        $role->name = $data['name'];
+        $role->name = Helper::getTitle($data['name']);
         $role->save();
 
         Flash::success('Rol creado correctamente.');
@@ -113,7 +113,7 @@ class RolesController extends Controller
         $this->validateForm("roles/edit/$id", $data, $rules);
 
         $role = $role;
-        $role->name = $data['name'];
+        $role->name = Helper::getTitle($data['name']);
         $role->save();
 
         Flash::success('Rol actualizado correctamente.');

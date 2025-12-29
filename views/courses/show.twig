@@ -68,6 +68,12 @@
                             <th>Modificado:</th>
                             <td> {{course.updated_at|date("d-m-Y H:i:s")}} </td>
                         </tr>
+                        <tr>
+                            <th>Secciones:</th>
+                            <td>
+                                <a href="{{BASE}}sections/sectionsCourse/{{course.id}}" class="btn btn-outline-secondary">Ver Secciones</a>
+                            </td>
+                        </tr>
                     </table>
                 {% else %}
                     <p class="text-secondary fs-4">No hay curso disponible</p>
