@@ -27,14 +27,7 @@ class AudiencesController extends Controller
 
     public function index()
     {
-        $this->validatePermission($this->_module, 'Listar');
-
-        $this->_view->load('audiences/index',[
-            'title' => 'Audiencias',
-            'subject' => 'Lista de Audiencias',
-            'audiences' => Audience::select('id','name')->get(),
-            'action' =>  'list',
-        ]);
+        $this->redirect();
     }
 
     public function create($course = null)
@@ -46,6 +39,7 @@ class AudiencesController extends Controller
             'title' => 'Audiencias',
             'subject' => 'Nueva Audiencia',
             'audience' => Session::get('form_data') ?? [],
+            'course' => $course,
             'send'   => $this->encrypt($this->getForm()),
             'process' => "audiences/store/$course",
             'action' => 'create',
@@ -114,6 +108,7 @@ class AudiencesController extends Controller
             'title' => 'Audiencias',
             'subject' => 'Editar Audiencia',
             'audience'   => $audience,
+            'course' => $audience->course_id,
             'send'   => $this->encrypt($this->getForm()),
             'process' => "audiences/update/{$id}",
             'action' => 'edit',
