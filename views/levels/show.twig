@@ -6,7 +6,7 @@
 <div class="app-content">
     <!--begin::Container-->
     <div class="container-fluid">
-        <div class="card mb-2">
+        <div class="card mb-2 col-md-6">
             <div class="card-header">
                 <h1 class="fs-3">
                     {{subject}}
@@ -42,7 +42,7 @@
         </div>
         <div class="row d-flex align-items-center">
             <div class="col-auto">
-                <a href="{{BASE}}categories" class="btn btn-primary">Volver</a>
+                <a href="{{BASE}}levels" class="btn btn-primary">Volver</a>
             </div>
             <div class="col-auto">
                 <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
