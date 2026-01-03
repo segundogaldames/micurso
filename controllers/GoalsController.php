@@ -34,7 +34,7 @@ class GoalsController extends Controller
         $this->_view->load('goals/goalsCourse',[
             'title' => 'Metas',
             'subject' => 'Lista de Metas ' . $exist->title,
-            'goals' => Goal::with('course')->get(),
+            'goals' => Goal::with('course')->where('course_id', (int) $course)->get(),
             'action' =>  'index',
             'route_create' => "goals/create/$course",
             'button_create' => 'Nueva Meta'

@@ -1,0 +1,70 @@
+{% extends "layout/default/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<div class="app-content">
+    <!--begin::Container-->
+    <div class="container-fluid">
+        <div class="card mb-2 col-md-6">
+            <div class="card-header">
+                <h1 class="fs-3">
+                    {{subject}}
+                </h1>
+                
+            </div>
+            <div class="card-body">
+                {% include "partials/_messages_admin.twig" %}
+                {% if requirement is not empty %}
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Id:</th>
+                            <td> {{requirement.id}} </td>
+                        </tr>
+                        <tr>
+                            <th>Meta:</th>
+                            <td> {{requirement.name}} </td>
+                        </tr>
+                        <tr>
+                            <th>Curso:</th>
+                            <td> {{requirement.course.title}} </td>
+                        </tr>
+                        <tr>
+                            <th>Creado:</th>
+                            <td> {{requirement.created_at|date("d-m-Y H:i:s")}} </td>
+                        </tr>
+                        <tr>
+                            <th>Modificado:</th>
+                            <td> {{requirement.updated_at|date("d-m-Y H:i:s")}} </td>
+                        </tr>
+                    </table>
+                {% else %}
+                    <p class="text-secondary fs-4">No hay requerimiento disponible</p>
+                {% endif %}
+                
+            </div>
+        </div>
+        <div class="row d-flex align-items-center">
+            <div class="col-auto">
+                <a href="{{BASE}}requirements/requirementsCourse/{{requirement.course_id}}" class="btn btn-primary">Volver</a>
+                </div>
+            <div class="col-auto">
+                <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
+                    <input type="hidden" name="requirement" value="{{requirement.id}}">
+                    <input type="hidden" name="course" value="{{requirement.course_id}}">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="send" value="{{send}}">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            function confirmDelete() {
+                return confirm("¿Estás seguro de eliminar este requerimiento?");
+            }
+        </script>
+    </div>
+    <!--end::Container-->
+</div>
+
+{% endblock %}

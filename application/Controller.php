@@ -153,7 +153,7 @@ class Controller
 
     protected function validatePermission($module, $task)
     {
-        //Helper::debuger($module);
+        //Helper::debuger($task);
         $permissions = Permission::with(['module','role','task'])->where('module_id',(int) $module)->get();
         //print_r($permisos);exit;
         if ($permissions->isEmpty()) {
