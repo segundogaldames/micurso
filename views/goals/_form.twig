@@ -2,10 +2,10 @@
     <!--begin::Body-->
     <div class="card-body">
         <div class="mb-3">
-            <label for="audience" class="form-label">Audiencia</label>
-            <input type="text" name="name" value="{{audience.name|default("")}}" class="form-control" id="audience" aria-describedby="audience" placeholder="Nombre de la audiencia" />
-            <div id="audience" class="form-text text-danger">
-                Ingrese el nombre de la audiencia
+            <label for="goal" class="form-label">Meta</label>
+            <input type="text" name="name" value="{{goal.name|default("")}}" class="form-control" id="goal" aria-describedby="goal" placeholder="Nombre de la meta" />
+            <div id="goal" class="form-text text-danger">
+                Ingrese el nombre de la meta
             </div>
         </div>
         
@@ -16,7 +16,7 @@
         <input type="hidden" name="_method" value="PUT">
         <input type="hidden" name="send" value="{{send}}">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="{{BASE}}audiences/audiencesCourse/{{course}}" class="btn btn-primary">Volver</a>
+        <a href="{{BASE}}goals/goalsCourse/{{course}}" class="btn btn-primary">Volver</a>
     </div>
     <!--end::Footer-->
 </form>

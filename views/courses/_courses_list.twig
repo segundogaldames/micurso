@@ -4,7 +4,7 @@
     <header class="mt-2">
         <h1 class="text-center text-xl text-gray-700"> {{course.title}} </h1>
     </header>
-    <p class="text-sm text-gray-500 mx-2 my-2"> {{course.description}} </p>
+    <p class="text-sm text-gray-500 mx-2 my-2"> {{course.description|raw}} </p>
     <p class="text-sm text-gray-400 mx-2 my-2">Categoría: {{course.category.name}} </p>
     <p class="text-sm text-gray-400 mx-2 my-2">Nivel: {{course.level.name}} </p>
     <p class="text-sm text-gray-400 mx-2 my-2">Prof: Segundo Galdames</p>

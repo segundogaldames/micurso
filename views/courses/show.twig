@@ -38,7 +38,7 @@
                         </tr>
                         <tr>
                             <th>Descripción:</th>
-                            <td> {{course.description}} </td>
+                            <td> {{course.description|raw}} </td>
                         </tr>
                         <tr>
                             <th>Estado:</th>
@@ -78,6 +78,12 @@
                             <th>Audiencias:</th>
                             <td>
                                 <a href="{{BASE}}audiences/audiencesCourse/{{course.id}}" class="btn btn-outline-secondary">Ver Audiencias</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Metas:</th>
+                            <td>
+                                <a href="{{BASE}}goals/goalsCourse/{{course.id}}" class="btn btn-outline-secondary">Ver Metas</a>
                             </td>
                         </tr>
                     </table>
