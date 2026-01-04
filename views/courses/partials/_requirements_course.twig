@@ -1,4 +1,4 @@
-<div x-show="openItems[3]">
+<div x-show="openItems[3]" class="mb-3">
     {% if course.requirements is not empty %}
     <table class="table table-hover">
         <thead>
@@ -24,7 +24,7 @@
         </tbody>
     </table>
     {% else %}
-    <p class="text-info">No hay requerimientos disponibles</p>
+    <p class="text-info mt-2 fs-4">No hay requerimientos disponibles</p>
     {% endif %}
     <a href="{{BASE}}requirements/create/{{course.id}}" class="btn btn-outline-secondary">Agregar Requerimiento</a>
 </div>

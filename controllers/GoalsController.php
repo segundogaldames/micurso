@@ -26,21 +26,6 @@ class GoalsController extends Controller
         $this->redirect();
     }
 
-    public function goalsCourse($course = null)
-    {
-        $this->validatePermission($this->_module, 'Listar');
-        $exist = Validate::validateModel(Course::class, $course, 'courses');
-
-        $this->_view->load('goals/goalsCourse',[
-            'title' => 'Metas',
-            'subject' => 'Lista de Metas ' . $exist->title,
-            'goals' => Goal::with('course')->where('course_id', (int) $course)->get(),
-            'action' =>  'index',
-            'route_create' => "goals/create/$course",
-            'button_create' => 'Nueva Meta'
-        ]);
-    }
-
     public function create($course = null)
     {
         $this->validatePermission($this->_module, 'Crear');
@@ -73,12 +58,12 @@ class GoalsController extends Controller
         $this->validateForm("goals/create/$course", $data, $rules);
 
         $goal = new Goal();
-        $goal->name = Helper::getTitle($data['name']);
+        $goal->name = Helper::getSentence($data['name']);
         $goal->course_id = (int) $course;
         $goal->save();
 
         Flash::success('Meta creada correctamente.');
-        $this->redirect('goals/goalsCourse/' . $course);
+        $this->redirect('courses/show/' . $course);
     }
 
     public function show($id = null)
@@ -128,7 +113,7 @@ class GoalsController extends Controller
         $this->validateForm("goals/edit/$id", $data, $rules);
 
         $goal = $goal;
-        $goal->name = Helper::getTitle($data['name']);
+        $goal->name = Helper::getSentence($data['name']);
         $goal->save();
 
         Flash::success('Meta actualizada correctamente.');
@@ -157,6 +142,6 @@ class GoalsController extends Controller
         $goal->delete();
         
         Flash::success('Meta eliminada correctamente');
-        $this->redirect('goals/goalsCourse/' . $data['course']);
+        $this->redirect('courses/show/' . $data['course']);
     }
 }

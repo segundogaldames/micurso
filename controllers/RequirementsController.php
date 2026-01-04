@@ -26,21 +26,6 @@ class RequirementsController extends Controller
         $this->redirect();
     }
 
-    public function requirementsCourse($course = null)
-    {
-        $this->validatePermission($this->_module, 'Listar');
-        $exist = Validate::validateModel(Course::class, $course, 'courses');
-
-        $this->_view->load('requirements/requirementsCourse',[
-            'title' => 'Requerimientos',
-            'subject' => 'Lista de Metas ' . $exist->title,
-            'requirements' => Requirement::with('course')->where('course_id', (int) $course)->get(),
-            'action' =>  'index',
-            'route_create' => "requirements/create/$course",
-            'button_create' => 'Nuevo Requerimiento'
-        ]);
-    }
-
     public function create($course = null)
     {
         $this->validatePermission($this->_module, 'Crear');
@@ -73,12 +58,12 @@ class RequirementsController extends Controller
         $this->validateForm("requirements/create/$course", $data, $rules);
 
         $requirement = new Requirement();
-        $requirement->name = Helper::getTitle($data['name']);
+        $requirement->name = Helper::getSentence($data['name']);
         $requirement->course_id = (int) $course;
         $requirement->save();
 
         Flash::success('Requerimiento creado correctamente.');
-        $this->redirect('requirements/requirementsCourse/' . $course);
+        $this->redirect('courses/show/' . $course);
     }
 
     public function show($id = null)
@@ -129,7 +114,7 @@ class RequirementsController extends Controller
         $this->validateForm("requirements/edit/$id", $data, $rules);
 
         $requirement = $requirement;
-        $requirement->name = Helper::getTitle($data['name']);
+        $requirement->name = Helper::getSentence($data['name']);
         $requirement->save();
 
         Flash::success('Requerimiento actualizado correctamente.');
@@ -146,7 +131,7 @@ class RequirementsController extends Controller
             'course' => Filter::getPost('course')
         ];
 
-$rules = [
+        $rules = [
             'requirement' => 'required|numeric',
             'course' => 'required|numeric',
         ];
@@ -158,6 +143,6 @@ $rules = [
         $requirement->delete();
         
         Flash::success('Meta eliminada correctamente');
-        $this->redirect('requirements/requirementsCourse/' . $data['course']);
+        $this->redirect('courses/show/' . $data['course']);
     }
 }
