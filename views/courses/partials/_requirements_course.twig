@@ -1,22 +1,22 @@
-<div x-show="openItems[1]" class="mb-3">
-    {% if course.audiences is not empty %}
+<div x-show="openItems[3]">
+    {% if course.requirements is not empty %}
     <table class="table table-hover">
         <thead>
             <tr>
                 <th class="col-2">Id</th>
-                <th class="col-4">Audiencia</th>
+                <th class="col-4">Requerimiento</th>
                 <th class="col-2">Actividades</th>
             </tr>
         </thead>
         <tbody>
-            {% for model in course.audiences %}
+            {% for model in course.requirements %}
             <tr>
                 <td> {{model.id}} </td>
                 <td> {{model.name}} </td>
                 <td>
-                    <a href="{{BASE}}audiences/show/{{model.id}}" class="btn btn-success btn-sm"><i
+                    <a href="{{BASE}}requirements/show/{{model.id}}" class="btn btn-success btn-sm"><i
                             class="bi bi-eye"></i></a>
-                    <a href="{{BASE}}audiences/edit/{{model.id}}" class="btn btn-warning btn-sm"><i
+                    <a href="{{BASE}}requirements/edit/{{model.id}}" class="btn btn-warning btn-sm"><i
                             class="bi bi-pencil-square"></i></a>
                 </td>
             </tr>
@@ -24,7 +24,7 @@
         </tbody>
     </table>
     {% else %}
-        <p class="text-info mt-2 fs-4">No hay audiencias disponibles</p>
+    <p class="text-info">No hay requerimientos disponibles</p>
     {% endif %}
-    <a href="{{BASE}}audiences/create/{{course.id}}" class="btn btn-outline-secondary">Agregar Audiencia</a>
+    <a href="{{BASE}}requirements/create/{{course.id}}" class="btn btn-outline-secondary">Agregar Requerimiento</a>
 </div>

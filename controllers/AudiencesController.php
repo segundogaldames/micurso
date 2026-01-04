@@ -32,6 +32,7 @@ class AudiencesController extends Controller
 
     public function create($course = null)
     {
+        //Helper::debuger($course);
         $this->validatePermission($this->_module, 'Crear');
         $exist = Validate::validateModel(Course::class, $course, 'courses');
 
@@ -62,27 +63,12 @@ class AudiencesController extends Controller
         $this->validateForm("audiences/create/$course", $data, $rules);
         
         $audience = new Audience();
-        $audience->name = Helper::getTitle($data['name']);
+        $audience->name = Helper::getSentence($data['name']);
         $audience->course_id = (int) $course;
         $audience->save();
 
         Flash::success('Audiencia creada correctamente.');
-        $this->redirect('audiences/audiencesCourse/' . $course);
-    }
-
-    public function audiencesCourse($course = null)
-    {
-        $this->validatePermission($this->_module, 'Listar');
-        $exist = Validate::validateModel(Course::class, $course, 'courses');
-
-        $this->_view->load('audiences/audiencesCourse',[
-            'title' => 'Audiencias',
-            'subject' => 'Audiencias ' . $exist->title,
-            'audiences' => Audience::select('id','name')->where('course_id', $exist->id)->get(),
-            'action' =>  'index',
-            'route_create' => "audiences/create/$course",
-            'button_create' => 'Nueva Audiencia'
-        ]);
+        $this->redirect('courses/show/' . $course);
     }
 
     public function show($id = null)
@@ -132,10 +118,10 @@ class AudiencesController extends Controller
         $this->validateForm("audiences/edit/$id", $data, $rules);
 
         $audience = $audience;
-        $audience->name = Helper::getTitle($data['name']);
+        $audience->name = Helper::getSentence($data['name']);
         $audience->save();
 
-        Flash::success('Categoría actualizada correctamente.');
+        Flash::success('Audiencia actualizada correctamente.');
         $this->redirect('audiences/show/' . $id);
     }
 
@@ -161,6 +147,6 @@ class AudiencesController extends Controller
         $audience->delete();
         
         Flash::success('Audiencia eliminada correctamente');
-        $this->redirect('audiences/audiencesCourse/' . $data['course']);
+        $this->redirect('courses/show/' . $data['course']);
     }
 }

@@ -61,7 +61,7 @@
                         </tr>
                         <tr>
                             <th>Instructor:</th>
-                            <td>${{course.user.name}} </td>
+                            <td>{{course.user.name}} </td>
                         </tr>
                         <tr>
                             <th>Creado:</th>
@@ -70,34 +70,6 @@
                         <tr>
                             <th>Modificado:</th>
                             <td> {{course.updated_at|date("d-m-Y H:i:s")}} </td>
-                        </tr>
-                        <tr>
-                            <th>Secciones:</th>
-                            <td>
-                                <a href="{{BASE}}sections/sectionsCourse/{{course.id}}"
-                                    class="btn btn-outline-secondary">Ver Secciones</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Audiencias:</th>
-                            <td>
-                                <a href="{{BASE}}audiences/audiencesCourse/{{course.id}}"
-                                    class="btn btn-outline-secondary">Ver Audiencias</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Metas:</th>
-                            <td>
-                                <a href="{{BASE}}goals/goalsCourse/{{course.id}}" class="btn btn-outline-secondary">Ver
-                                    Metas</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Requerimientos:</th>
-                            <td>
-                                <a href="{{BASE}}requirements/requirementsCourse/{{course.id}}"
-                                    class="btn btn-outline-secondary">Ver Requerimientos</a>
-                            </td>
                         </tr>
                     </table>
                     {% else %}
@@ -143,6 +115,16 @@
                             Ver Audiencias
                         </a>
                         {% include "courses/partials/_audiences_course.twig" %}
+                        <a href="#" x-on:click="openItems[2] = !openItems[2]" class="list-group-item list-group-item-action list-group-item-primary"
+                            aria-current="true">
+                            Ver Metas
+                        </a>
+                        {% include "courses/partials/_goals_course.twig" %}
+                         <a href="#" x-on:click="openItems[3] = !openItems[3]" class="list-group-item list-group-item-action list-group-item-primary"
+                            aria-current="true">
+                            Ver Requerimientos
+                        </a>
+                        {% include "courses/partials/_requirements_course.twig" %}
                     </div>
 
                 </div>
