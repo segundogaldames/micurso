@@ -1,0 +1,52 @@
+{% extends "layout/default/template.twig" %}
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<div class="app-content">
+    <!--begin::Container-->
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="fs-3">
+                    {{subject}}
+                    {% if action == 'index' %}
+                        <a href="{{BASE}}{{route_create}}" class="btn btn-outline-secondary"> {{button_create}} </a>
+                    {% endif %}
+                </h1>                
+            </div>
+            <div class="card-body">
+                {% include "partials/_messages_admin.twig" %}
+                {% if categories is not empty %}
+                    <table class="table table-hover" id="myTable">
+                        <thead>
+                            <tr>
+                                <th class="col-2">Id</th>
+                                <th class="col-8">Categoría</th>
+                                <th class="col-2">Actividades</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for model in categories %}
+                                <tr>
+                                    <td> {{model.id}} </td>
+                                    <td> {{model.name}} </td>
+                                    <td>
+                                        <a href="{{BASE}}categories/show/{{model.id}}" class="btn btn-success btn-sm"><i class="bi bi-eye"></i></a>
+                                        <a href="{{BASE}}categories/edit/{{model.id}}" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-secondary fs-4">No hay categorías disponibles</p>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+    <!--end::Container-->
+</div>
+
+{% endblock %}

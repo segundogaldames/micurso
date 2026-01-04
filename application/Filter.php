@@ -30,6 +30,12 @@ class Filter
         return isset($_POST[$key]) ? self::sanitizeAlphaNum($_POST[$key]) : '';
     }
 
+    public static function getPostHtml($key)
+    {
+        // Este método devuelve el contenido TAL CUAL lo envió el usuario
+        return isset($_POST[$key]) ? trim($_POST[$key]) : '';
+    }
+
     public static function getPostRaw($key)
     {
         return isset($_POST[$key]) ? htmlspecialchars(trim($_POST[$key]), ENT_QUOTES, 'UTF-8') : '';

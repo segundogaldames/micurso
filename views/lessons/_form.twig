@@ -1,0 +1,68 @@
+<form action="{{BASE}}{{process}}" method="post">
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" name="name" value="{{lesson.name|default("")}}" class="form-control" id="name" aria-describedby="name" placeholder="Nombre de la lección" />
+            <div id="name" class="form-text text-danger">
+                Ingrese el nombre de la lección
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="link" class="form-label">link</label>
+            <input type="text" name="link" value="{{lesson.link|default("")}}" class="form-control" id="link" aria-describedby="link" placeholder="Link de la lección" />
+            <div id="link" class="form-text text-danger">
+                Ingrese el link de la lección
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="iframe" class="form-label">Iframe</label>
+            <textarea name="iframe" id="iframe" class="form-control" rows="4" aria-describedby="iframe" placeholder="Iframe de la lección">
+                {{lesson.iframe|raw}}
+            </textarea>
+            <div id="iframe" class="form-text text-danger">
+                Ingrese el iframe de la lección
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="platform" class="form-label">Plataforma</label>
+            <select name="platform" id="platform" class="form-control">
+                {% if action == 'edit' %}
+                    <option value="{{lesson.platform_id}}"> {{lesson.platform.name}} </option>
+                {% endif %}
+                <option value="">Seleccione la plataforma</option>
+                {% for platform in platforms %}
+                    <option value="{{platform.id}}"> {{platform.name}} </option>
+                {% endfor %}
+            </select>
+            <div id="platform" class="form-text text-danger">
+                Seleccione la plataforma de la lección
+            </div>
+        </div>
+        {% if action == 'edit' %}
+            <div class="mb-3">
+                <label for="section" class="form-label">Sección</label>
+                <select name="section" id="section" class="form-control"> 
+                    <option value="{{lesson.section_id}}"> {{lesson.section.name}} </option>    
+                    <option value="">Seleccione la sección</option>
+                    {% for section in sections %}
+                        <option value="{{section.id}}"> {{section.name}} </option>
+                    {% endfor %}
+                </select>
+                <div id="platform" class="form-text text-danger">
+                    Seleccione la sección de la lección
+                </div>
+            </div>
+        {% endif %}
+        
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <div class="card-footer">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{send}}">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{BASE}}lessons/lessonsSection/{{lesson.section_id}}" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Footer-->
+</form>
