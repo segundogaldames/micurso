@@ -1,0 +1,31 @@
+<div x-show="openItems[0]" class="mb-3">
+    {% if course.sections is not empty %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-2">Id</th>
+                <th class="col-4">Sección</th>
+                <th class="col-2">Actividades</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for model in course.sections %}
+            <tr>
+                <td> {{model.id}} </td>
+                <td> {{model.name}} </td>
+                <td>
+                    <a href="{{BASE}}sections/show/{{model.id}}" class="btn btn-success btn-sm"><i
+                            class="bi bi-eye"></i></a>
+                    <a href="{{BASE}}sections/edit/{{model.id}}" class="btn btn-warning btn-sm"><i
+                            class="bi bi-pencil-square"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <span class="text-info">Secciones no disponibles</span>
+    {% endif %}
+    <a href="{{BASE}}sections/create/{{course.id}}" class="btn btn-outline-secondary">Agregar Sección</a>
+</div>

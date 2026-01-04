@@ -44,6 +44,17 @@
                             <td> {{lesson.section.name}} </td>
                         </tr>
                         <tr>
+                            <th>Descripción:</th>
+                            <td>
+                                {% if lesson.descripcion is not empty %}
+                                    {{lesson.descripcion}}
+                                {% else %}
+                                    <span class="text-info">Descripción no disponible</span>
+                                {% endif %}
+                                
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Creado:</th>
                             <td> {{lesson.created_at|date("d-m-Y H:i:s")}} </td>
                         </tr>

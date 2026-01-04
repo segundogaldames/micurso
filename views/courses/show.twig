@@ -2,26 +2,29 @@
 {% block title %} {{title}} {% endblock %}
 
 {% block content %}
-
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <div class="app-content">
     <!--begin::Container-->
     <div class="container-fluid">
-        <div class="card mb-2 col-md-6">
-            <div class="card-header">
-                <h1 class="fs-3">
-                    {{subject}}
-                </h1>
-                
-            </div>
-            <div class="card-body">
-                {% include "partials/_messages_admin.twig" %}
-                {% if course is not empty %}
+        <div class="row">
+            <div class="card mb-2 col-md-6">
+                <div class="card-header">
+                    <h1 class="fs-3">
+                        {{subject}}
+                    </h1>
+
+                </div>
+                <div class="card-body">
+                    {% include "partials/_messages_admin.twig" %}
+                    {% if course is not empty %}
                     <table class="table table-hover">
                         <tr>
                             <th>Imagen:</th>
-                            <td> 
-                                <img src="{{ BASE }}public/img/courses/{{ course.image }}" alt="Imagen Curso" class="img-thumbnail img-fluid">
-                                <a href="{{BASE}}courses/editImage/{{course.id}}" class="btn btn-outline-secondary btn-sm">Cambiar Imagen</a>
+                            <td>
+                                <img src="{{ BASE }}public/img/courses/{{ course.image }}" alt="Imagen Curso"
+                                    class="img-thumbnail img-fluid">
+                                <a href="{{BASE}}courses/editImage/{{course.id}}"
+                                    class="btn btn-outline-secondary btn-sm">Cambiar Imagen</a>
                             </td>
                         </tr>
                         <tr>
@@ -71,52 +74,81 @@
                         <tr>
                             <th>Secciones:</th>
                             <td>
-                                <a href="{{BASE}}sections/sectionsCourse/{{course.id}}" class="btn btn-outline-secondary">Ver Secciones</a>
+                                <a href="{{BASE}}sections/sectionsCourse/{{course.id}}"
+                                    class="btn btn-outline-secondary">Ver Secciones</a>
                             </td>
                         </tr>
                         <tr>
                             <th>Audiencias:</th>
                             <td>
-                                <a href="{{BASE}}audiences/audiencesCourse/{{course.id}}" class="btn btn-outline-secondary">Ver Audiencias</a>
+                                <a href="{{BASE}}audiences/audiencesCourse/{{course.id}}"
+                                    class="btn btn-outline-secondary">Ver Audiencias</a>
                             </td>
                         </tr>
                         <tr>
                             <th>Metas:</th>
                             <td>
-                                <a href="{{BASE}}goals/goalsCourse/{{course.id}}" class="btn btn-outline-secondary">Ver Metas</a>
+                                <a href="{{BASE}}goals/goalsCourse/{{course.id}}" class="btn btn-outline-secondary">Ver
+                                    Metas</a>
                             </td>
                         </tr>
                         <tr>
                             <th>Requerimientos:</th>
                             <td>
-                                <a href="{{BASE}}requirements/requirementsCourse/{{course.id}}" class="btn btn-outline-secondary">Ver Requerimientos</a>
+                                <a href="{{BASE}}requirements/requirementsCourse/{{course.id}}"
+                                    class="btn btn-outline-secondary">Ver Requerimientos</a>
                             </td>
                         </tr>
                     </table>
-                {% else %}
+                    {% else %}
                     <p class="text-secondary fs-4">No hay curso disponible</p>
-                {% endif %}
-                
+                    {% endif %}
+
+                </div>
+                <div class="row d-flex align-items-center mb-3 mx-2">
+                    <div class="col-auto">
+                        <a href="{{BASE}}courses" class="btn btn-primary">Volver</a>
+                    </div>
+                    <div class="col-auto">
+                        <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
+                            <input type="hidden" name="course" value="{{course.id}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="send" value="{{send}}">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    function confirmDelete() {
+                        return confirm("¿Estás seguro de eliminar este curso?");
+                    }
+                </script>
+            </div>
+            <div class=" card mb-2 col-md-6">
+                <div class="card-header">
+                    <h1 class="fs-3">
+                        Detalles del Curso
+                    </h1>
+
+                </div>
+                <div class="card-body" x-data="{ openItems: [false, false, false, false] }">
+                    <div class="list-group">
+                        <a href="#" x-on:click="openItems[0] = !openItems[0]" class="list-group-item list-group-item-action list-group-item-primary"
+                            aria-current="true">
+                            Ver Secciones
+                        </a>
+                        {% include "courses/partials/_sections_course.twig" %}
+                        <a href="#" x-on:click="openItems[1] = !openItems[1]" class="list-group-item list-group-item-action list-group-item-primary"
+                            aria-current="true">
+                            Ver Audiencias
+                        </a>
+                        {% include "courses/partials/_audiences_course.twig" %}
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="row d-flex align-items-center">
-            <div class="col-auto">
-                <a href="{{BASE}}courses" class="btn btn-primary">Volver</a>
-            </div>
-            <div class="col-auto">
-                <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
-                    <input type="hidden" name="course" value="{{course.id}}">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="send" value="{{send}}">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
-            </div>
-        </div>
-        <script>
-            function confirmDelete() {
-                return confirm("¿Estás seguro de eliminar este curso?");
-            }
-        </script>
+
     </div>
     <!--end::Container-->
 </div>

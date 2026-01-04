@@ -1,0 +1,24 @@
+<form action="{{BASE}}{{process}}" method="post">
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea name="text" id="description" class="form-control" aria-describedby="description" placeholder="Descripción de la lección">
+                {{description.text|default("")}}
+            </textarea>
+            
+            <div id="description" class="form-text text-danger">
+                Ingrese la Descripción de la lección
+            </div>
+        </div>
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <div class="card-footer">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{send}}">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{BASE}}lessons/show/{{lesson}}" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Footer-->
+</form>

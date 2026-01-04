@@ -81,7 +81,7 @@ class SectionsController extends Controller
         $section->save();
 
         Flash::success('Sección creada correctamente.');
-        $this->redirect('sections/sectionsCourse/' . $course);
+        $this->redirect('courses/show/' . $course);
     }
 
     public function show($id = null)
@@ -161,12 +161,12 @@ class SectionsController extends Controller
 
         if ($lessons) {
             Flash::error('Hay lecciones asociadas. No se puede eliminar');
-            $this->redirect('courses');
+            $this->redirect('courses/show/' . $data['course']);
         }
 
         $section->delete();
         
         Flash::success('Sección eliminada correctamente');
-        $this->redirect('sections/sectionsCourse/' . $data['course']);
+        $this->redirect('courses/show/' . $data['course']);
     }
 }
