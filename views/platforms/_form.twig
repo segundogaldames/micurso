@@ -1,0 +1,21 @@
+<form action="{{BASE}}{{process}}" method="post">
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="platform" class="form-label">Plataforma</label>
+            <input type="text" name="name" value="{{platform.name|default("")}}" class="form-control" id="platform" aria-describedby="platform" placeholder="Nombre de la plataforma" />
+            <div id="platform" class="form-text text-danger">
+                Ingrese el nombre de la plataforma
+            </div>
+        </div>
+    </div>
+    <!--end::Body-->
+    <!--begin::Footer-->
+    <div class="card-footer">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="send" value="{{send}}">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{{BASE}}platforms" class="btn btn-primary">Volver</a>
+    </div>
+    <!--end::Footer-->
+</form>

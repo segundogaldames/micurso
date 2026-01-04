@@ -146,7 +146,7 @@ class RequirementsController extends Controller
             'course' => Filter::getPost('course')
         ];
 
-        $rules = [
+$rules = [
             'requirement' => 'required|numeric',
             'course' => 'required|numeric',
         ];
