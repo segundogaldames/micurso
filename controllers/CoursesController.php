@@ -7,11 +7,14 @@ use application\Flash;
 use application\Helper;
 use application\Session;
 use application\Validate;
+use models\Audience;
 use models\Course;
 use models\Category;
 use models\Level;
 use models\CourseUser;
+use models\Goal;
 use models\Price;
+use models\Requirement;
 use models\Status;
 use models\Section;
 
@@ -419,10 +422,13 @@ class CoursesController extends Controller
         
         $course = Validate::validateModel(Course::class, $data['course'],'courses');
         $sections = Section::where('course_id', $course->id)->exists();
+        $audiences = Audience::where('course_id', $course->id)->exists();
+        $goals = Goal::where('course_id', $course->id)->exists();
+        $requirements = Requirement::where('course_id', $course->id)->exists();
 
-        if ($sections) {
-            Flash::error('Hay secciones asociadas. No se puede eliminar');
-            $this->redirect('courses');
+        if ($sections || $audiences || $goals || $requirements) {
+            Flash::error('Hay elementos asociados. No se puede eliminar');
+            $this->redirect('courses/show/' . $data['course']);
         }
 
         $course->delete();
