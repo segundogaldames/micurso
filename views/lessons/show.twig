@@ -6,88 +6,121 @@
 <div class="app-content">
     <!--begin::Container-->
     <div class="container-fluid">
-        <div class="card mb-2 col-md-6">
-            <div class="card-header">
-                <h1 class="fs-3">
-                    {{subject}}
-                </h1>
-                
+        <div class="row">
+            <div class="card mb-2 col-md-6">
+                <div class="card-header">
+                    <h1 class="fs-3">
+                        {{subject}}
+                    </h1>
+                    
+                </div>
+                <div class="card-body">
+                    {% include "partials/_messages_admin.twig" %}
+                    {% if lesson is not empty %}
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Id:</th>
+                                <td> {{lesson.id}} </td>
+                            </tr>
+                            <tr>
+                                <th>Nombre:</th>
+                                <td> {{lesson.name}} </td>
+                            </tr>
+                            <tr>
+                                <th>Link:</th>
+                                <td> 
+                                    <a href="{{lesson.link}}" target="_blank">Ver Video</a> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Plataforma:</th>
+                                <td> {{lesson.platform.name}} </td>
+                            </tr>
+                            <tr>
+                                <th>Sección:</th>
+                                <td> {{lesson.section.name}} </td>
+                            </tr>
+                            <tr>
+                                <th>Descripción:</th>
+                                <td>
+                                    
+                                    {% if lesson.description.id is defined and lesson.description.id is not null %}
+                                        <div class="row d-flex align-items-center mb-3 mx-2">
+                                            <p>{{lesson.description.text}}</p>
+                                            <div class="col-auto">
+                                                <a href="{{BASE}}descriptions/edit/{{lesson.description.id}}" class="btn btn-outline-warning btn-sm">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                    Editar Descripción
+                                                </a>
+
+                                            </div>
+                                            <div class="col-auto">
+                                                <form action="{{BASE}}descriptions/delete" method="post" onsubmit="return confirmDeleteDescription();" class="m-0">
+                                                    <input type="hidden" name="description" value="{{lesson.description.id}}">
+                                                    <input type="hidden" name="lesson" value="{{lesson.id}}">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="send" value="{{send}}">
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                                                </form>
+                                                <script>
+                                                    function confirmDeleteDescription() {
+                                                        return confirm("¿Estás seguro de eliminar esta descripción?");
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                            <p class="text-info">Descripción no disponible</p>
+                                            <a href="{{BASE}}descriptions/create/{{lesson.id}}" class="btn btn-outline-primary btn-sm">Agregar Descripción</a>
+                                        {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Creado:</th>
+                                <td> {{lesson.created_at|date("d-m-Y H:i:s")}} </td>
+                            </tr>
+                            <tr>
+                                <th>Modificado:</th>
+                                <td> {{lesson.updated_at|date("d-m-Y H:i:s")}} </td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <p class="text-secondary fs-4">No hay lección disponible</p>
+                    {% endif %}
+                    
+                </div>
+                <div class="row d-flex align-items-center mb-3 mx-2">
+                    <div class="col-auto">
+                        <a href="{{BASE}}sections/show/{{lesson.section_id}}" class="btn btn-primary">Volver</a>
+                    </div>
+                    <div class="col-auto">
+                        <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
+                            <input type="hidden" name="lesson" value="{{lesson.id}}">
+                            <input type="hidden" name="section" value="{{lesson.section_id}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="send" value="{{send}}">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    function confirmDelete() {
+                        return confirm("¿Estás seguro de eliminar esta lección?");
+                    }
+                </script>
             </div>
-            <div class="card-body">
-                {% include "partials/_messages_admin.twig" %}
-                {% if lesson is not empty %}
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Iframe:</th>
-                            <td> {{lesson.iframe|raw}} </td>
-                        </tr>
-                        <tr>
-                            <th>Id:</th>
-                            <td> {{lesson.id}} </td>
-                        </tr>
-                        <tr>
-                            <th>Nombre:</th>
-                            <td> {{lesson.name}} </td>
-                        </tr>
-                        <tr>
-                            <th>Link:</th>
-                            <td> 
-                                <a href="{{lesson.link}}" target="_blank">Ver Video</a> 
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Plataforma:</th>
-                            <td> {{lesson.platform.name}} </td>
-                        </tr>
-                        <tr>
-                            <th>Sección:</th>
-                            <td> {{lesson.section.name}} </td>
-                        </tr>
-                        <tr>
-                            <th>Descripción:</th>
-                            <td>
-                                {% if lesson.descripcion is not empty %}
-                                    {{lesson.descripcion}}
-                                {% else %}
-                                    <span class="text-info">Descripción no disponible</span>
-                                {% endif %}
-                                
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Creado:</th>
-                            <td> {{lesson.created_at|date("d-m-Y H:i:s")}} </td>
-                        </tr>
-                        <tr>
-                            <th>Modificado:</th>
-                            <td> {{lesson.updated_at|date("d-m-Y H:i:s")}} </td>
-                        </tr>
-                    </table>
-                {% else %}
-                    <p class="text-secondary fs-4">No hay lección disponible</p>
-                {% endif %}
-                
+            <div class="card mb-2 col-md-6">
+                <div class="card-header">
+                    <h1 class="fs-3">
+                        Video
+                    </h1>
+                    
+                </div>
+                 <div class="card-body">
+                    {{lesson.iframe|raw}}
+                 </div>
             </div>
         </div>
-        <div class="row d-flex align-items-center">
-            <div class="col-auto">
-                <a href="{{BASE}}lessons/lessonsSection/{{lesson.section_id}}" class="btn btn-primary">Volver</a>
-            </div>
-            <div class="col-auto">
-                <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
-                    <input type="hidden" name="lesson" value="{{lesson.id}}">
-                    <input type="hidden" name="section" value="{{lesson.section_id}}">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="send" value="{{send}}">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
-            </div>
-        </div>
-        <script>
-            function confirmDelete() {
-                return confirm("¿Estás seguro de eliminar esta lección?");
-            }
-        </script>
     </div>
     <!--end::Container-->
 </div>

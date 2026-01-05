@@ -2,73 +2,87 @@
 {% block title %} {{title}} {% endblock %}
 
 {% block content %}
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 <div class="app-content">
     <!--begin::Container-->
     <div class="container-fluid">
-        <div class="card mb-2 col-md-6">
-            <div class="card-header">
-                <h1 class="fs-3">
-                    {{subject}}
-                </h1>
-                
-            </div>
-            <div class="card-body">
-                {% include "partials/_messages_admin.twig" %}
-                {% if section is not empty %}
-                    <table class="table table-hover">
-                        <tr>
-                            <th>Id:</th>
-                            <td> {{section.id}} </td>
-                        </tr>
-                        <tr>
-                            <th>Sección:</th>
-                            <td> {{section.name}} </td>
-                        </tr>
-                        <tr>
-                            <th>Curso:</th>
-                            <td> {{section.course.title}} </td>
-                        </tr>
-                        <tr>
-                            <th>Creado:</th>
-                            <td> {{section.created_at|date("d-m-Y H:i:s")}} </td>
-                        </tr>
-                        <tr>
-                            <th>Modificado:</th>
-                            <td> {{section.updated_at|date("d-m-Y H:i:s")}} </td>
-                        </tr>
-                        <tr>
-                            <th>Lecciones:</th>
-                            <td>
-                                <a href="{{BASE}}lessons/lessonsSection/{{section.id}}" class="btn btn-outline-secondary">Ver Lecciones</a>
-                            </td>
-                        </tr>
-                    </table>
-                {% else %}
-                    <p class="text-secondary fs-4">No hay sección disponible</p>
-                {% endif %}
-                
-            </div>
-        </div>
-        <div class="row d-flex align-items-center">
-            <div class="col-auto">
-                <a href="{{BASE}}courses/show/{{section.course_id}}" class="btn btn-primary">Volver</a>
+        <div class="row">
+            <div class="card mb-2 col-md-6">
+                <div class="card-header">
+                    <h1 class="fs-3">
+                        {{subject}}
+                    </h1>
+                    
                 </div>
-            <div class="col-auto">
-                <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
-                    <input type="hidden" name="section" value="{{section.id}}">
-                    <input type="hidden" name="course" value="{{section.course_id}}">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="send" value="{{send}}">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
+                <div class="card-body">
+                    {% include "partials/_messages_admin.twig" %}
+                    {% if section is not empty %}
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Id:</th>
+                                <td> {{section.id}} </td>
+                            </tr>
+                            <tr>
+                                <th>Sección:</th>
+                                <td> {{section.name}} </td>
+                            </tr>
+                            <tr>
+                                <th>Curso:</th>
+                                <td> {{section.course.title}} </td>
+                            </tr>
+                            <tr>
+                                <th>Creado:</th>
+                                <td> {{section.created_at|date("d-m-Y H:i:s")}} </td>
+                            </tr>
+                            <tr>
+                                <th>Modificado:</th>
+                                <td> {{section.updated_at|date("d-m-Y H:i:s")}} </td>
+                            </tr>
+                        </table>
+                    {% else %}
+                        <p class="text-secondary fs-4">No hay sección disponible</p>
+                    {% endif %}
+                    
+                </div>
+                <div class="row d-flex align-items-center mb-3 mx-2">
+                    <div class="col-auto">
+                        <a href="{{BASE}}courses/show/{{section.course_id}}" class="btn btn-primary">Volver</a>
+                        </div>
+                    <div class="col-auto">
+                        <form action="{{BASE}}{{process}}" method="post" onsubmit="return confirmDelete();" class="m-0">
+                            <input type="hidden" name="section" value="{{section.id}}">
+                            <input type="hidden" name="course" value="{{section.course_id}}">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="send" value="{{send}}">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    function confirmDelete() {
+                        return confirm("¿Estás seguro de eliminar esta sección?");
+                    }
+                </script>
+            </div>
+            <div class="card mb-2 col-md-6">
+                <div class="card-header">
+                    <h1 class="fs-3">
+                        Detalles de la Sección
+                    </h1>
+                    
+                </div>
+                <div class="card-body" x-data="{ open: false}">
+                    <div class="list-group">
+                        <a href="#" x-on:click="open = !open" class="list-group-item list-group-item-action list-group-item-primary"
+                            aria-current="true">
+                            Ver Lecciones
+                        </a>
+                        {% include "sections/_lessons_section.twig" %}
+                    </div>
+                </div>
             </div>
         </div>
-        <script>
-            function confirmDelete() {
-                return confirm("¿Estás seguro de eliminar esta sección?");
-            }
-        </script>
     </div>
     <!--end::Container-->
 </div>

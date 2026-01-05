@@ -33,7 +33,7 @@ class DescriptionsController extends Controller
 
         $this->_view->load('descriptions/create', [
             'title' => 'Descripción',
-            'subject' => 'Nueva Descripción',
+            'subject' => 'Nueva Descripción '. $lesson_exist->name,
             'description' => Session::get('form_data') ?? [],
             'lesson' => $lesson,
             'send'   => $this->encrypt($this->getForm()),
@@ -106,31 +106,32 @@ class DescriptionsController extends Controller
         $this->validateForm("descriptions/edit/$id", $data, $rules);
 
         $description = $description;
-        $description->name = Helper::getTitle($data['name']);
+        $description->text = Helper::getSentence($data['text']);
         $description->save();
 
         Flash::success('Descripción actualizada correctamente.');
-        $this->redirect('descriptions/show/' . $id);
+        $this->redirect('lessons/show/' . $description->lesson_id);
     }
 
     public function delete()
     {
         $this->validatePermission($this->_module, 'Eliminar');
         $this->validateDelete();
-
+        
         $data = [
             'description' => Filter::getPost('description'),
             'lesson' => Filter::getPost('lesson'),
         ];
-
+        
         $rules = [
             'description' => 'required|numeric',
             'lesson' => 'required|numeric',
         ];
-
+        
         $this->validateForm("error/denied", $data, $rules);
-
-        $description = Validate::validateModel(Description::class, $data['descriptions'],'courses');
+        
+        $description = Validate::validateModel(Description::class, $data['description'],'courses');
+        //Helper::debuger($description);
 
         $description->delete();
         
